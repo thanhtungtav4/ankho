@@ -106,6 +106,25 @@
     });
   }
 
+  /* "Mua ngay": add to cart then jump straight to checkout */
+  function initBuyNowButtons() {
+    document.querySelectorAll('[data-buy-now]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-product-id');
+        var name = btn.getAttribute('data-product-name') || 'sản phẩm';
+        var qtyInput = document.querySelector('[data-qty-value]');
+        var qty = 1;
+        if (qtyInput && btn.hasAttribute('data-use-qty')) {
+          qty = parseInt(qtyInput.textContent, 10) || 1;
+        }
+        var cart = readCart();
+        cart[id] = (cart[id] || 0) + qty;
+        writeCart(cart);
+        window.location.href = 'checkout.html';
+      });
+    });
+  }
+
   /* ---------------------------------------------------------------------
      Header: scroll shadow, hamburger drawer, mobile bottom nav actions
      --------------------------------------------------------------------- */
@@ -411,9 +430,13 @@
     var filterList = document.querySelector('[data-filter-list]');
     var sortSelect = document.querySelector('[data-sort-select]');
     var countEl = document.querySelector('[data-results-count]');
+    var searchInfoEl = document.querySelector('[data-search-info]');
 
     var params = new URLSearchParams(window.location.search);
-    var state = { cat: params.get('cat') || 'all', sort: 'popular' };
+    var state = { cat: params.get('cat') || 'all', sort: 'popular', query: (params.get('q') || '').trim() };
+
+    var searchInput = document.getElementById('siteSearchInput');
+    if (searchInput && state.query) searchInput.value = state.query;
 
     function renderFilters() {
       if (!filterList) return;
@@ -438,13 +461,27 @@
 
     function renderGrid() {
       var list = state.cat === 'all' ? PRODUCTS.slice() : PRODUCTS.filter(function (p) { return p.cat === state.cat; });
+      if (state.query) {
+        var q = state.query.toLowerCase();
+        list = list.filter(function (p) { return p.name.toLowerCase().indexOf(q) !== -1; });
+      }
       if (state.sort === 'asc') list.sort(function (a, b) { return a.price - b.price; });
       else if (state.sort === 'desc') list.sort(function (a, b) { return b.price - a.price; });
       else list.sort(function (a, b) { return b.sold - a.sold; });
 
-      grid.innerHTML = list.map(productCardHTML).join('');
+      grid.innerHTML = list.length
+        ? list.map(productCardHTML).join('')
+        : '<p class="empty-state">Không tìm thấy sản phẩm phù hợp' + (state.query ? ' với "' + state.query + '"' : '') + '.</p>';
       if (countEl) countEl.textContent = String(list.length);
+      if (searchInfoEl) {
+        searchInfoEl.textContent = state.query ? ' cho "' + state.query + '"' : '';
+      }
       initAddToCartButtons();
+    }
+
+    if (state.query) {
+      var clearLink = document.querySelector('[data-clear-search]');
+      if (clearLink) clearLink.hidden = false;
     }
 
     if (sortSelect) {
@@ -603,12 +640,293 @@
     });
   }
 
+  function findProduct(id) {
+    return PRODUCTS.filter(function (p) { return p.id === id; })[0] || null;
+  }
+
+  var SHIPPING_FEE = 30000;
+  var FREE_SHIPPING_THRESHOLD = 500000;
+
+  function orderSummaryLineHTML(name, qty, lineTotal) {
+    return (
+      '<div class="order-summary-item"><span class="order-summary-item__name">' + name +
+      ' <span class="order-summary-item__qty">× ' + qty + '</span></span>' +
+      '<span class="order-summary-item__price">' + formatPrice(lineTotal) + '</span></div>'
+    );
+  }
+
+  /* ---------------------------------------------------------------------
+     Cart page
+     --------------------------------------------------------------------- */
+  function cartLineHTML(product, qty) {
+    return (
+      '<div class="cart-line" data-cart-line data-id="' + product.id + '">' +
+        '<span class="cart-line__img" role="img" aria-label="' + product.name + '">ảnh: ' + product.img + '</span>' +
+        '<div class="cart-line__info">' +
+          '<a href="product-detail.html" class="cart-line__name">' + product.name + '</a>' +
+          '<span class="cart-line__price">' + formatPrice(product.price) + ' / sản phẩm</span>' +
+        '</div>' +
+        '<div class="qty-stepper cart-line__qty">' +
+          '<button type="button" data-cart-dec aria-label="Giảm số lượng">−</button>' +
+          '<span class="qty-stepper__value" data-cart-qty>' + qty + '</span>' +
+          '<button type="button" data-cart-inc aria-label="Tăng số lượng">+</button>' +
+        '</div>' +
+        '<span class="cart-line__total">' + formatPrice(product.price * qty) + '</span>' +
+        '<button type="button" class="cart-line__remove" data-cart-remove aria-label="Xóa ' + product.name + ' khỏi giỏ">' +
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>' +
+        '</button>' +
+      '</div>'
+    );
+  }
+
+  function initCartPage() {
+    var container = document.querySelector('[data-cart-items]');
+    if (!container) return;
+    var subtotalEl = document.querySelector('[data-cart-subtotal]');
+    var shippingEl = document.querySelector('[data-cart-shipping]');
+    var totalEl = document.querySelector('[data-cart-total]');
+    var summaryEl = document.querySelector('[data-cart-summary]');
+
+    function changeQty(id, delta) {
+      var cart = readCart();
+      var next = (cart[id] || 0) + delta;
+      if (next <= 0) delete cart[id]; else cart[id] = next;
+      writeCart(cart);
+      render();
+    }
+
+    function removeItem(id) {
+      var cart = readCart();
+      delete cart[id];
+      writeCart(cart);
+      render();
+    }
+
+    function render() {
+      var cart = readCart();
+      var ids = Object.keys(cart).filter(function (id) { return cart[id] > 0; });
+
+      if (!ids.length) {
+        container.innerHTML =
+          '<div class="cart-empty">' +
+            '<span class="cart-empty__icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg></span>' +
+            '<p class="cart-empty__title">Giỏ hàng của bạn đang trống</p>' +
+            '<p>Hãy khám phá các đặc sản miền Tây của Bếp Phù Sa.</p>' +
+            '<a href="products.html" class="btn-solid-cta cart-empty__cta">Tiếp tục mua sắm</a>' +
+          '</div>';
+        if (summaryEl) summaryEl.hidden = true;
+        updateCartBadges();
+        return;
+      }
+
+      if (summaryEl) summaryEl.hidden = false;
+      var subtotal = 0;
+      container.innerHTML = ids.map(function (id) {
+        var product = findProduct(id);
+        if (!product) return '';
+        subtotal += product.price * cart[id];
+        return cartLineHTML(product, cart[id]);
+      }).join('');
+
+      var shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+      if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+      if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Miễn phí' : formatPrice(shipping);
+      if (totalEl) totalEl.textContent = formatPrice(subtotal + shipping);
+
+      container.querySelectorAll('[data-cart-line]').forEach(function (line) {
+        var id = line.getAttribute('data-id');
+        var incBtn = line.querySelector('[data-cart-inc]');
+        var decBtn = line.querySelector('[data-cart-dec]');
+        var removeBtn = line.querySelector('[data-cart-remove]');
+        if (incBtn) incBtn.addEventListener('click', function () { changeQty(id, 1); });
+        if (decBtn) decBtn.addEventListener('click', function () { changeQty(id, -1); });
+        if (removeBtn) removeBtn.addEventListener('click', function () { removeItem(id); });
+      });
+
+      updateCartBadges();
+    }
+
+    render();
+  }
+
+  /* ---------------------------------------------------------------------
+     Checkout page (front-end only: order is stored in localStorage,
+     ready to be swapped for a real API call once the backend exists)
+     --------------------------------------------------------------------- */
+  function setFormMsg(el, text, ok) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('is-ok', ok);
+    el.classList.toggle('is-error', !ok);
+  }
+
+  function initCheckoutPage() {
+    var layout = document.querySelector('[data-checkout-layout]');
+    var emptyEl = document.querySelector('[data-checkout-empty]');
+    var form = document.querySelector('[data-checkout-form]');
+    if (!layout && !form) return;
+
+    var cart = readCart();
+    var ids = Object.keys(cart).filter(function (id) { return cart[id] > 0; });
+
+    if (!ids.length) {
+      if (layout) layout.hidden = true;
+      if (emptyEl) emptyEl.hidden = false;
+      return;
+    }
+    if (emptyEl) emptyEl.hidden = true;
+    if (layout) layout.hidden = false;
+
+    var items = [];
+    var subtotal = 0;
+    var listEl = document.querySelector('[data-order-summary-list]');
+    var rows = ids.map(function (id) {
+      var product = findProduct(id);
+      if (!product) return '';
+      var qty = cart[id];
+      subtotal += product.price * qty;
+      items.push({ id: id, name: product.name, qty: qty, price: product.price });
+      return orderSummaryLineHTML(product.name, qty, product.price * qty);
+    });
+    if (listEl) listEl.innerHTML = rows.join('');
+
+    var shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+    var total = subtotal + shipping;
+    var subtotalEl = document.querySelector('[data-order-subtotal]');
+    var shippingEl = document.querySelector('[data-order-shipping]');
+    var totalEl = document.querySelector('[data-order-total]');
+    if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+    if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Miễn phí' : formatPrice(shipping);
+    if (totalEl) totalEl.textContent = formatPrice(total);
+
+    if (!form) return;
+    var msgEl = form.querySelector('[data-form-msg]');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = form.querySelector('[data-field-name]').value.trim();
+      var phone = form.querySelector('[data-field-phone]').value.trim();
+      var address = form.querySelector('[data-field-address]').value.trim();
+      var emailField = form.querySelector('[data-field-email]');
+      var noteField = form.querySelector('[data-field-note]');
+      var paymentField = form.querySelector('input[name="payment"]:checked');
+
+      if (!name || !phone || !address) {
+        setFormMsg(msgEl, 'Vui lòng điền đầy đủ họ tên, số điện thoại và địa chỉ.', false);
+        return;
+      }
+      if (!/^[0-9+ ]{9,15}$/.test(phone)) {
+        setFormMsg(msgEl, 'Số điện thoại không hợp lệ.', false);
+        return;
+      }
+
+      var order = {
+        id: 'DH' + Date.now(),
+        items: items,
+        subtotal: subtotal,
+        shipping: shipping,
+        total: total,
+        customer: {
+          name: name, phone: phone, address: address,
+          email: emailField ? emailField.value.trim() : '',
+          note: noteField ? noteField.value.trim() : ''
+        },
+        payment: paymentField ? paymentField.value : 'cod',
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        var orders = JSON.parse(localStorage.getItem('bps_orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('bps_orders', JSON.stringify(orders));
+        localStorage.setItem('bps_last_order', JSON.stringify(order));
+      } catch (err) { /* storage unavailable */ }
+
+      writeCart({});
+      window.location.href = 'order-success.html';
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     Order success page
+     --------------------------------------------------------------------- */
+  function initOrderSuccessPage() {
+    var box = document.querySelector('[data-order-success]');
+    if (!box) return;
+
+    var order = null;
+    try { order = JSON.parse(localStorage.getItem('bps_last_order') || 'null'); } catch (e) { order = null; }
+
+    var idEl = document.querySelector('[data-order-id]');
+    var listEl = document.querySelector('[data-order-success-list]');
+    var totalEl = document.querySelector('[data-order-success-total]');
+
+    if (!order) {
+      if (idEl) idEl.hidden = true;
+      if (listEl) listEl.innerHTML = '<p>Không tìm thấy thông tin đơn hàng gần đây.</p>';
+      if (totalEl) totalEl.textContent = '';
+      return;
+    }
+
+    if (idEl) idEl.textContent = 'Mã đơn: ' + order.id;
+    if (listEl) {
+      listEl.innerHTML = order.items.map(function (it) {
+        return orderSummaryLineHTML(it.name, it.qty, it.price * it.qty);
+      }).join('');
+    }
+    if (totalEl) totalEl.textContent = formatPrice(order.total);
+  }
+
+  /* ---------------------------------------------------------------------
+     Auth pages (login / register) — client-side validation only;
+     wire the real submit handler up once the backend exists
+     --------------------------------------------------------------------- */
+  function initAuthForms() {
+    document.querySelectorAll('[data-login-form], [data-register-form]').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var msgEl = form.querySelector('[data-form-msg]');
+        var isRegister = form.hasAttribute('data-register-form');
+        var nameField = form.querySelector('[data-field-name]');
+        var emailField = form.querySelector('[data-field-email]');
+        var passwordField = form.querySelector('[data-field-password]');
+        var confirmField = form.querySelector('[data-field-confirm]');
+
+        if (isRegister && nameField && !nameField.value.trim()) {
+          setFormMsg(msgEl, 'Vui lòng nhập họ tên.', false);
+          return;
+        }
+        var emailVal = emailField ? emailField.value.trim() : '';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+          setFormMsg(msgEl, 'Vui lòng nhập email hợp lệ.', false);
+          return;
+        }
+        var passwordVal = passwordField ? passwordField.value : '';
+        if (passwordVal.length < 6) {
+          setFormMsg(msgEl, 'Mật khẩu phải có ít nhất 6 ký tự.', false);
+          return;
+        }
+        if (isRegister && confirmField && confirmField.value !== passwordVal) {
+          setFormMsg(msgEl, 'Mật khẩu nhập lại không khớp.', false);
+          return;
+        }
+
+        setFormMsg(
+          msgEl,
+          'Thông tin hợp lệ. Chức năng ' + (isRegister ? 'đăng ký' : 'đăng nhập') + ' sẽ được kích hoạt khi kết nối hệ thống backend.',
+          true
+        );
+      });
+    });
+  }
+
   /* ---------------------------------------------------------------------
      Boot
      --------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
     updateCartBadges();
     initAddToCartButtons();
+    initBuyNowButtons();
     initDrawer();
     initBackToTop();
     initScrollToProducts();
@@ -627,5 +945,9 @@
     initContactForm();
     initNewsFilter();
     initPolicyNav();
+    initCartPage();
+    initCheckoutPage();
+    initOrderSuccessPage();
+    initAuthForms();
   });
 })();
