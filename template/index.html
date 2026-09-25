@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bếp Phù Sa — Đặc sản miền Tây</title>
+<meta name="description" content="Chuyên cung cấp các loại mắm, khô, đặc sản miền Tây chất lượng cao, an toàn và thơm ngon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="has-bottom-nav">
+<a href="#main" class="skip-link">Bỏ qua tới nội dung chính</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="topbar__item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Giao hàng toàn quốc</span>
+        <span class="topbar__item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><path d="M20 12v7H4v-7"/><path d="M2 7h20v5H2z"/><path d="M12 22V7M12 7S9 2 6.5 4 12 7 12 7zM12 7s3-5 5.5-3S12 7 12 7z"/></svg>Miễn phí vận chuyển đơn từ 500.000đ</span>
+      </div>
+      <div class="topbar__right">
+        <a href="contact.html" class="topbar__support"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Hỗ trợ 24/7: 0909 123 456</a>
+        <div class="topbar__social">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V8c0-1.1.4-2 2-2h2V2.1C18.3 2 17.2 2 16 2c-3 0-5 1.8-5 5.2V10H8v4h3v8z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container header-main">
+    <button type="button" class="hamburger-btn" data-drawer-open aria-label="Mở menu" aria-controls="siteDrawer" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a href="index.html" class="brand">
+      <span class="brand__mark">BS</span>
+      <span><span class="brand__name">Bếp Phù Sa</span><span class="brand__tagline">Đặc sản miền Tây</span></span>
+    </a>
+    <form action="products.html" class="header-search">
+      <a href="products.html" class="header-search__cat">Tất cả danh mục<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></a>
+      <label for="siteSearchInput" class="sr-only">Tìm sản phẩm</label>
+      <input id="siteSearchInput" name="q" type="search" placeholder="Bạn cần tìm đặc sản gì hôm nay?" class="header-search__input">
+      <button type="submit" class="header-search__submit" aria-label="Tìm kiếm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+    </form>
+    <div class="header-actions">
+      <a href="#" class="header-account">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span class="header-actions__label"><span class="muted">Đăng nhập</span><span class="strong">Tài khoản</span></span>
+      </a>
+      <a href="#products" class="header-cart" aria-label="Giỏ hàng">
+        <span class="cart-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
+          <span class="cart-badge" data-cart-count>0</span>
+        </span>
+        <span class="header-actions__label"><span class="muted">Giỏ</span><span class="strong">hàng</span></span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="desktop-nav" aria-label="Chính">
+    <div class="container desktop-nav__inner">
+      <ul class="desktop-nav__list">
+        <li><a href="index.html" class="desktop-nav__link is-active">TRANG CHỦ</a></li>
+        <li><a href="products.html?cat=mam" class="desktop-nav__link">MẮM</a></li>
+        <li><a href="products.html?cat=khoca" class="desktop-nav__link">KHÔ CÁ</a></li>
+        <li><a href="products.html?cat=khomuc" class="desktop-nav__link">KHÔ MỰC</a></li>
+        <li><a href="products.html?cat=dacsan" class="desktop-nav__link">ĐẶC SẢN</a></li>
+        <li><a href="products.html?cat=combo" class="desktop-nav__link">COMBO - QUÀ TẶNG</a></li>
+        <li><a href="about.html" class="desktop-nav__link">VỀ CHÚNG TÔI</a></li>
+        <li><a href="news.html" class="desktop-nav__link">TIN TỨC</a></li>
+      </ul>
+      <a href="policy.html" class="desktop-nav__promise">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b1e2d" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span><strong>Cam kết chất lượng</strong><br>Hoàn tiền 100% nếu không hài lòng</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<div class="drawer-overlay" data-drawer-overlay data-drawer-close></div>
+<aside id="siteDrawer" class="drawer" role="dialog" aria-modal="true" aria-label="Menu" data-drawer aria-hidden="true">
+  <div class="drawer__head">
+    <span class="drawer__title">Bếp Phù Sa</span>
+    <button type="button" class="drawer__close" data-drawer-close aria-label="Đóng menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav class="drawer__nav" aria-label="Menu di động">
+    <ul>
+      <li><a href="index.html" class="drawer__link">TRANG CHỦ<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="products.html?cat=mam" class="drawer__link">MẮM<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="products.html?cat=khoca" class="drawer__link">KHÔ CÁ<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="products.html?cat=khomuc" class="drawer__link">KHÔ MỰC<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="products.html?cat=dacsan" class="drawer__link">ĐẶC SẢN<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="products.html?cat=combo" class="drawer__link">COMBO - QUÀ TẶNG<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="about.html" class="drawer__link">VỀ CHÚNG TÔI<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      <li><a href="news.html" class="drawer__link">TIN TỨC<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a></li>
+    </ul>
+  </nav>
+</aside>
+
+<main id="main">
+  <!-- HERO -->
+  <section aria-label="Giới thiệu" class="hero" data-hero>
+    <div class="container">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <div data-hero-slide>
+            <h1 class="hero__title">Tinh túy đặc sản<br><span class="hero__title-script">Miền Tây đậm vị</span></h1>
+            <p class="hero__desc">Tuyển chọn nguyên liệu tươi ngon, chế biến theo công thức truyền thống, mang đến hương vị đậm đà khó quên.</p>
+          </div>
+          <div data-hero-slide hidden>
+            <h1 class="hero__title">Mắm ngon trứ danh<br><span class="hero__title-script">Hương vị quê nhà</span></h1>
+            <p class="hero__desc">Mắm cá linh, cá sặc, mắm thái ủ theo bí quyết gia truyền — đậm đà, thơm ngon, đưa cơm mỗi bữa.</p>
+          </div>
+          <div data-hero-slide hidden>
+            <h1 class="hero__title">Combo quà biếu<br><span class="hero__title-script">Trọn vị yêu thương</span></h1>
+            <p class="hero__desc">Hộp quà sang trọng gói trọn đặc sản miền Tây, ý nghĩa để dành tặng người thân trong dịp lễ Tết.</p>
+          </div>
+          <button type="button" class="btn-cta" data-scroll-to="products">KHÁM PHÁ NGAY<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <ul class="hero__usps">
+            <li class="hero__usp"><span class="hero__usp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-5 5-9 16-9 0 8-4 13-9 13z"/><path d="M4 20c2-4 5-7 9-9"/></svg></span>Nguyên liệu tự nhiên</li>
+            <li class="hero__usp"><span class="hero__usp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h16v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M2 9h20M8 6c0-1 4-1 4 0M9 3v3M15 3v3"/></svg></span>Chế biến truyền thống</li>
+            <li class="hero__usp"><span class="hero__usp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></span>Không chất bảo quản</li>
+            <li class="hero__usp"><span class="hero__usp-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>Giao hàng toàn quốc</li>
+          </ul>
+        </div>
+        <div class="hero__visual">
+          <div role="img" aria-label="Rổ đặc sản khô cá miền Tây" class="hero__photo">ảnh sản phẩm</div>
+          <div class="hero__badge"><span class="hero__badge-num">100%</span><span class="hero__badge-label">Nguyên liệu<br>tự nhiên</span></div>
+        </div>
+      </div>
+      <div class="hero__controls">
+        <button type="button" class="hero__arrow" data-hero-prev aria-label="Slide trước"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <div class="hero__dots">
+          <button type="button" class="hero__dot is-active" data-hero-dot aria-label="Chuyển slide 1"></button>
+          <button type="button" class="hero__dot" data-hero-dot aria-label="Chuyển slide 2"></button>
+          <button type="button" class="hero__dot" data-hero-dot aria-label="Chuyển slide 3"></button>
+        </div>
+        <button type="button" class="hero__arrow" data-hero-next aria-label="Slide sau"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section aria-label="Danh mục sản phẩm" class="section section--tight-top">
+    <ul class="category-grid">
+      <li><a href="products.html?cat=mam" class="category-card"><span role="img" aria-label="Mắm" class="category-card__img">Mắm</span><span class="category-card__name">Mắm</span><span class="category-card__cta">Xem tất cả</span></a></li>
+      <li><a href="products.html?cat=khoca" class="category-card"><span role="img" aria-label="Khô cá" class="category-card__img">Khô cá</span><span class="category-card__name">Khô cá</span><span class="category-card__cta">Xem tất cả</span></a></li>
+      <li><a href="products.html?cat=khomuc" class="category-card"><span role="img" aria-label="Khô mực" class="category-card__img">Khô mực</span><span class="category-card__name">Khô mực</span><span class="category-card__cta">Xem tất cả</span></a></li>
+      <li><a href="products.html?cat=dacsan" class="category-card"><span role="img" aria-label="Đặc sản" class="category-card__img">Đặc sản</span><span class="category-card__name">Đặc sản</span><span class="category-card__cta">Xem tất cả</span></a></li>
+      <li><a href="products.html?cat=combo" class="category-card"><span role="img" aria-label="Combo - Quà tặng" class="category-card__img">Combo - Quà tặng</span><span class="category-card__name">Combo - Quà tặng</span><span class="category-card__cta">Xem tất cả</span></a></li>
+      <li><a href="products.html?cat=combo" class="category-card"><span role="img" aria-label="Quà biếu Tết" class="category-card__img">Quà biếu Tết</span><span class="category-card__name">Quà biếu Tết</span><span class="category-card__cta">Xem tất cả</span></a></li>
+    </ul>
+  </section>
+
+  <!-- TOP SELLERS -->
+  <section id="products" aria-label="Sản phẩm bán chạy" class="section">
+    <div class="section-head">
+      <h2 class="section-title">🔥 TOP 10 BÁN CHẠY</h2>
+      <a href="products.html" class="section-link">Xem tất cả<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="product-grid">
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Mắm cá linh chưng sả ớt" class="product-card__img">ảnh: mắm cá linh</div>
+          <span class="product-card__badge badge--best">BEST SELLER</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=mam-ca-linh">Mắm cá linh chưng sả ớt</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 5 trên 5">★★★★★</span><span>(128)</span></div>
+          <div class="product-card__sold">Đã bán 1.250</div>
+          <div class="product-card__price-row"><span class="price">120.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="mam-ca-linh" data-product-name="Mắm cá linh chưng sả ớt" aria-label="Thêm Mắm cá linh chưng sả ớt vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Mắm thái chua ngọt" class="product-card__img">ảnh: mắm thái</div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=mam-thai">Mắm thái chua ngọt</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 5 trên 5">★★★★★</span><span>(96)</span></div>
+          <div class="product-card__sold">Đã bán 980</div>
+          <div class="product-card__price-row"><span class="price">115.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="mam-thai" data-product-name="Mắm thái chua ngọt" aria-label="Thêm Mắm thái chua ngọt vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Khô cá lóc dẻo ngon" class="product-card__img">ảnh: khô cá lóc</div>
+          <span class="product-card__badge badge--sale">-10%</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=kho-ca-loc">Khô cá lóc dẻo ngon</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 4.5 trên 5">★★★★★</span><span>(218)</span></div>
+          <div class="product-card__sold">Đã bán 1.160</div>
+          <div class="product-card__price-row"><span class="price">155.000đ</span><span class="price price--old">172.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="kho-ca-loc" data-product-name="Khô cá lóc dẻo ngon" aria-label="Thêm Khô cá lóc dẻo ngon vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Khô cá dứa 1 nắng" class="product-card__img">ảnh: khô cá dứa</div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=kho-ca-dua">Khô cá dứa 1 nắng</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 5 trên 5">★★★★★</span><span>(156)</span></div>
+          <div class="product-card__sold">Đã bán 1.240</div>
+          <div class="product-card__price-row"><span class="price">135.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="kho-ca-dua" data-product-name="Khô cá dứa 1 nắng" aria-label="Thêm Khô cá dứa 1 nắng vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Mắm cá sặc đặc biệt" class="product-card__img">ảnh: mắm cá sặc</div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=mam-ca-sac">Mắm cá sặc đặc biệt</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 4.5 trên 5">★★★★★</span><span>(74)</span></div>
+          <div class="product-card__sold">Đã bán 650</div>
+          <div class="product-card__price-row"><span class="price">110.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="mam-ca-sac" data-product-name="Mắm cá sặc đặc biệt" aria-label="Thêm Mắm cá sặc đặc biệt vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="product-card__media">
+          <div role="img" aria-label="Combo quà tặng 4 món đặc sản" class="product-card__img">ảnh: combo quà tặng</div>
+          <span class="product-card__badge badge--combo">COMBO</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name"><a href="product-detail.html?id=combo-qua-tang">Combo quà tặng 4 món đặc sản</a></h3>
+          <div class="product-card__rating"><span class="stars" aria-label="Đánh giá 5 trên 5">★★★★★</span><span>(82)</span></div>
+          <div class="product-card__sold">Đã bán 420</div>
+          <div class="product-card__price-row"><span class="price">450.000đ</span></div>
+          <button type="button" class="btn-add" data-add-to-cart data-product-id="combo-qua-tang" data-product-name="Combo quà tặng 4 món đặc sản" aria-label="Thêm Combo quà tặng 4 món đặc sản vào giỏ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Thêm vào giỏ</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROMO BANNERS -->
+  <section aria-label="Ưu đãi" class="section">
+    <div class="promo-grid">
+      <article class="promo-card promo-card--1">
+        <div>
+          <h3 class="promo-card__title">FLASH SALE CUỐI TUẦN</h3>
+          <p class="promo-card__sub">Giảm đến 30% cho một số sản phẩm khô cá</p>
+          <div class="countdown" data-countdown>
+            <span class="countdown__part"><span class="countdown__value" data-countdown-value>00</span><span class="countdown__label">Ngày</span></span>
+            <span class="countdown__part"><span class="countdown__value" data-countdown-value>00</span><span class="countdown__label">Giờ</span></span>
+            <span class="countdown__part"><span class="countdown__value" data-countdown-value>00</span><span class="countdown__label">Phút</span></span>
+            <span class="countdown__part"><span class="countdown__value" data-countdown-value>00</span><span class="countdown__label">Giây</span></span>
+          </div>
+        </div>
+        <a href="products.html" class="promo-card__cta">MUA NGAY</a>
+      </article>
+      <article class="promo-card promo-card--2">
+        <div>
+          <h3 class="promo-card__title">COMBO TIẾT KIỆM</h3>
+          <p class="promo-card__sub">Tiết kiệm đến</p>
+          <div class="promo-card__big">20%</div>
+        </div>
+        <a href="products.html?cat=combo" class="promo-card__cta">MUA NGAY</a>
+      </article>
+      <article class="promo-card promo-card--3">
+        <div>
+          <h3 class="promo-card__title">QUÀ BIẾU TẾT 2025</h3>
+          <p class="promo-card__sub promo-card__sub--narrow">Hộp quà sang trọng, ý nghĩa trọn vẹn</p>
+        </div>
+        <a href="products.html?cat=combo" class="promo-card__cta">XEM NGAY</a>
+      </article>
+      <article class="promo-card promo-card--4">
+        <div>
+          <h3 class="promo-card__title">MIỄN PHÍ VẬN CHUYỂN</h3>
+          <p class="promo-card__sub">Cho đơn hàng từ 500.000đ</p>
+          <div class="promo-card__big">FREESHIP</div>
+        </div>
+        <a href="products.html" class="promo-card__cta">MUA NGAY</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section aria-label="Đặc sản nổi bật" class="section">
+    <div class="section-head">
+      <h2 class="section-title">🏵️ ĐẶC SẢN NỔI BẬT</h2>
+      <a href="products.html" class="section-link">Xem tất cả<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="featured-grid">
+      <a href="products.html?cat=khoca" class="featured-card"><span role="img" aria-label="Khô cá lóc" class="featured-card__img">ảnh: Khô cá lóc</span><span class="featured-card__name">Khô cá lóc</span><span class="featured-card__more">Xem chi tiết<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="products.html?cat=khoca" class="featured-card"><span role="img" aria-label="Khô cá dứa" class="featured-card__img">ảnh: Khô cá dứa</span><span class="featured-card__name">Khô cá dứa</span><span class="featured-card__more">Xem chi tiết<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="products.html?cat=khomuc" class="featured-card"><span role="img" aria-label="Khô mực" class="featured-card__img">ảnh: Khô mực</span><span class="featured-card__name">Khô mực</span><span class="featured-card__more">Xem chi tiết<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="products.html?cat=mam" class="featured-card"><span role="img" aria-label="Mắm đặc sản" class="featured-card__img">ảnh: Mắm đặc sản</span><span class="featured-card__name">Mắm đặc sản</span><span class="featured-card__more">Xem chi tiết<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a href="products.html?cat=combo" class="featured-card"><span role="img" aria-label="Combo - Quà tặng" class="featured-card__img">ảnh: Combo - Quà tặng</span><span class="featured-card__name">Combo - Quà tặng</span><span class="featured-card__more">Xem chi tiết<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section aria-label="Vì sao chọn Bếp Phù Sa" class="stats-section" data-stats-section>
+    <div class="section">
+      <h2 class="section-title section-title--center">VÌ SAO CHỌN BẾP PHÙ SA?</h2>
+      <ul class="stats-grid">
+        <li class="stat-item">
+          <span class="stat-item__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.9 6 6.6.9-4.8 4.6 1.1 6.5L12 18l-5.8 3 1.1-6.5L2.5 9.9 9.1 9z"/></svg></span>
+          <span class="stat-item__value" data-stat-value data-stat-target="10" data-stat-suffix="+" data-stat-suffix-target="10+">0</span>
+          <span class="stat-item__label">Năm kinh nghiệm trong lĩnh vực đặc sản</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-item__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></span>
+          <span class="stat-item__value" data-stat-value data-stat-target="5000" data-stat-suffix="+" data-stat-suffix-target="5.000+">0</span>
+          <span class="stat-item__label">Sản phẩm đã bán ra mỗi tháng</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-item__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+          <span class="stat-item__value" data-stat-value data-stat-target="97" data-stat-suffix="%" data-stat-suffix-target="97%">0</span>
+          <span class="stat-item__label">Khách hàng hài lòng về chất lượng</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-item__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-6 8-12a8 8 0 1 0-16 0c0 6 8 12 8 12z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="stat-item__value" data-stat-value data-stat-target="48" data-stat-suffix="" data-stat-suffix-target="48">0</span>
+          <span class="stat-item__label">Tỉnh thành đã có khách hàng</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-item__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></span>
+          <span class="stat-item__value" data-stat-value data-stat-target="100" data-stat-suffix="%" data-stat-suffix-target="100%">0</span>
+          <span class="stat-item__label">Đổi trả nếu không hài lòng</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section aria-label="Đánh giá khách hàng" class="section">
+    <div class="section-head">
+      <h2 class="section-title">KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI?</h2>
+      <div class="carousel-arrows">
+        <button type="button" class="carousel-arrow" data-review-prev aria-label="Đánh giá trước"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button type="button" class="carousel-arrow" data-review-next aria-label="Đánh giá sau"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="reviews-viewport">
+      <ul class="reviews-track" data-reviews-track>
+        <li class="review-card" data-review-item>
+          <div class="review-card__head"><span class="review-card__avatar" role="img" aria-label="Ảnh Chị Hương – TP.HCM"></span><span><span class="review-card__name">Chị Hương – TP.HCM</span><span class="review-card__stars" aria-label="5 sao">★★★★★</span></span></div>
+          <p class="review-card__text">"Mắm rất đậm đà, ngon đúng điệu, vị vừa ăn, không quá mặn. Sẽ ủng hộ lâu dài!"</p>
+          <div class="review-card__photo" role="img" aria-label="Ảnh món ăn đã mua">ảnh món ăn khách gửi</div>
+        </li>
+        <li class="review-card" data-review-item>
+          <div class="review-card__head"><span class="review-card__avatar" role="img" aria-label="Ảnh Anh Tuấn – Cần Thơ"></span><span><span class="review-card__name">Anh Tuấn – Cần Thơ</span><span class="review-card__stars" aria-label="5 sao">★★★★★</span></span></div>
+          <p class="review-card__text">"Khô cá dẻo mềm, thơm rất thật, thịt chắc, ngọt tự nhiên. Giao hàng nhanh, đóng gói kỹ."</p>
+          <div class="review-card__photo" role="img" aria-label="Ảnh món ăn đã mua">ảnh món ăn khách gửi</div>
+        </li>
+        <li class="review-card" data-review-item>
+          <div class="review-card__head"><span class="review-card__avatar" role="img" aria-label="Ảnh Chị Mai – Hà Nội"></span><span><span class="review-card__name">Chị Mai – Hà Nội</span><span class="review-card__stars" aria-label="5 sao">★★★★★</span></span></div>
+          <p class="review-card__text">"Combo quà tặng đóng gói đẹp mắt, phù hợp biếu tặng. Mọi người đều khen ngon."</p>
+          <div class="review-card__photo" role="img" aria-label="Ảnh món ăn đã mua">ảnh món ăn khách gửi</div>
+        </li>
+        <li class="review-card" data-review-item>
+          <div class="review-card__head"><span class="review-card__avatar" role="img" aria-label="Ảnh Anh Phúc – Đà Nẵng"></span><span><span class="review-card__name">Anh Phúc – Đà Nẵng</span><span class="review-card__stars" aria-label="5 sao">★★★★★</span></span></div>
+          <p class="review-card__text">"Mắm cá linh chưng sả ớt thơm ngon, đưa cơm lắm. Sẽ mua lại nhiều lần nữa."</p>
+          <div class="review-card__photo" role="img" aria-label="Ảnh món ăn đã mua">ảnh món ăn khách gửi</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VIDEO + STORY -->
+  <section aria-label="Quy trình và câu chuyện thương hiệu" class="section">
+    <div class="story-grid">
+      <div class="story-video">
+        <span class="story-video__tag">QUY TRÌNH LÀM KHÔ TRUYỀN THỐNG</span>
+        <button type="button" class="story-video__play" data-video-open aria-label="Phát video quy trình"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+        <h3 class="story-video__title">Giữ trọn vị ngon<br>Từ thiên nhiên</h3>
+        <span class="story-video__duration">01:45</span>
+      </div>
+      <div class="story-panel">
+        <h3 class="story-panel__title">Câu chuyện Bếp Phù Sa</h3>
+        <p class="story-panel__text">Bếp Phù Sa ra đời từ tình yêu với ẩm thực miền Tây và mong muốn mang những đặc sản đậm hương vị quê nhà đến gần hơn với mọi gia đình Việt.</p>
+        <ul class="story-points">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Nguyên liệu chọn lọc tại vùng đồng nước miền Tây</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Chế biến theo công thức truyền thống</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Đảm bảo an toàn, không chất bảo quản</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Đóng gói cẩn thận, giữ trọn hương vị</li>
+        </ul>
+        <div class="story-panel__photo" role="img" aria-label="Cảnh sông nước miền Tây">ảnh: sông nước miền Tây</div>
+        <a href="about.html" class="btn-outline-cta">TÌM HIỂU THÊM<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section aria-label="Instagram" class="section">
+    <h2 class="section-title section-title--center">#BẾPPHÙSA TRÊN INSTAGRAM</h2>
+    <div class="insta-grid">
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" class="insta-tile insta-tile--more"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Xem thêm<br>trên Instagram</a>
+    </div>
+  </section>
+</main>
+
+<!-- NEWSLETTER -->
+<section aria-label="Đăng ký nhận tin" class="newsletter">
+  <div class="container newsletter__inner">
+    <div>
+      <h2 class="newsletter__title">Đăng ký nhận tin</h2>
+      <p class="newsletter__desc">Nhận ưu đãi và tin sản phẩm mới nhất từ Bếp Phù Sa</p>
+      <form data-newsletter-form novalidate class="newsletter__form">
+        <label for="newsEmail" class="sr-only">Email của bạn</label>
+        <input id="newsEmail" type="email" placeholder="Nhập email của bạn..." aria-describedby="newsMsg" class="newsletter__input">
+        <button type="submit" class="newsletter__submit">ĐĂNG KÝ</button>
+      </form>
+      <p id="newsMsg" aria-live="polite" class="newsletter__msg" data-newsletter-msg></p>
+    </div>
+    <ul class="trust-list">
+      <li class="trust-item"><span class="trust-item__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></span><span><strong>Thanh toán an toàn</strong>Đa dạng hình thức</span></li>
+      <li class="trust-item"><span class="trust-item__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></span><span><strong>Đổi trả dễ dàng</strong>Trong 7 ngày</span></li>
+      <li class="trust-item"><span class="trust-item__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span><span><strong>Giao hàng nhanh</strong>Toàn quốc</span></li>
+      <li class="trust-item"><span class="trust-item__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span><span><strong>Hỗ trợ 24/7</strong>0909 123 456</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <span class="footer-brand__mark">BS</span>
+        <span class="footer-brand__name">Bếp Phù Sa</span>
+      </div>
+      <p class="footer-about">Chuyên cung cấp các loại mắm, khô, đặc sản miền Tây chất lượng cao, an toàn và thơm ngon.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V8c0-1.1.4-2 2-2h2V2.1C18.3 2 17.2 2 16 2c-3 0-5 1.8-5 5.2V10H8v4h3v8z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2a2.6 2.6 0 0 0-1.8-1.8C18.6 6 12 6 12 6s-6.6 0-8.2.4A2.6 2.6 0 0 0 2 8.2 27 27 0 0 0 1.7 12 27 27 0 0 0 2 15.8a2.6 2.6 0 0 0 1.8 1.8C5.4 18 12 18 12 18s6.6 0 8.2-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22.3 12 27 27 0 0 0 22 8.2zM10 15V9l5.2 3z"/></svg></a>
+      </div>
+    </div>
+    <nav aria-label="Về chúng tôi">
+      <h3 class="footer-heading">Về chúng tôi</h3>
+      <ul class="footer-links">
+        <li><a href="about.html">Giới thiệu</a></li>
+        <li><a href="about.html">Quy trình sản xuất</a></li>
+        <li><a href="news.html">Tin tức</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Chính sách">
+      <h3 class="footer-heading">Chính sách</h3>
+      <ul class="footer-links">
+        <li><a href="policy.html">Chính sách đổi trả</a></li>
+        <li><a href="policy.html">Chính sách bảo mật</a></li>
+        <li><a href="policy.html">Chính sách vận chuyển</a></li>
+        <li><a href="policy.html">Điều khoản sử dụng</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Hỗ trợ khách hàng">
+      <h3 class="footer-heading">Hỗ trợ khách hàng</h3>
+      <ul class="footer-links">
+        <li><a href="policy.html">Hướng dẫn mua hàng</a></li>
+        <li><a href="policy.html">Câu hỏi thường gặp</a></li>
+        <li><a href="policy.html">Thanh toán</a></li>
+        <li><a href="contact.html">Bảo hành &amp; khiếu nại</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h3 class="footer-heading">Liên hệ</h3>
+      <ul class="footer-contact">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Hotline: 0909 123 456</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>bepphusa@gmail.com</li>
+        <li class="align-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c99a48" stroke-width="2"><path d="M12 22s8-6 8-12a8 8 0 1 0-16 0c0 6 8 12 8 12z"/><circle cx="12" cy="10" r="3"/></svg>123 Đường Sông Hậu, P. Cái Khế, Q. Ninh Kiều, TP. Cần Thơ</li>
+      </ul>
+      <div class="footer-payments">
+        <span>VISA</span><span>MOMO</span><span>COD</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Bếp Phù Sa — Đặc sản miền Tây. Bảo lưu mọi quyền.</p></div>
+</footer>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav" aria-label="Điều hướng nhanh">
+  <a href="index.html" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>Trang chủ</a>
+  <button type="button" class="bottom-nav__item" data-drawer-open><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Danh mục</button>
+  <a href="products.html" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Tìm kiếm</a>
+  <a href="#products" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Giỏ hàng<span class="bottom-nav__badge" data-cart-count>0</span></a>
+  <a href="#" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Tài khoản</a>
+</nav>
+
+<!-- VIDEO MODAL -->
+<div role="dialog" aria-modal="true" aria-label="Video quy trình" class="video-modal" data-video-modal>
+  <div class="video-modal__inner">
+    <button type="button" class="video-modal__close" data-video-close aria-label="Đóng video"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="video-modal__screen"><svg width="52" height="52" viewBox="0 0 24 24" fill="#c99a48"><path d="M8 5v14l11-7z"/></svg>video: quy trình làm khô truyền thống<br>(nhúng &lt;iframe&gt; hoặc &lt;video&gt; thật tại đây)</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div aria-live="polite" class="toast-wrap toast-wrap--above-nav" data-toast-wrap></div>
+
+<!-- BACK TO TOP -->
+<button type="button" class="back-top" data-back-top aria-label="Lên đầu trang"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
