@@ -828,10 +828,16 @@ table {
 
 .hero__usps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px 22px;
   margin-top: 36px;
   max-width: 520px;
+}
+
+@media (max-width: 420px) {
+  .hero__usps {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero__usp {
