@@ -38,6 +38,7 @@
     var shippingEl = document.querySelector('[data-cart-shipping]');
     var totalEl = document.querySelector('[data-cart-total]');
     var summaryEl = document.querySelector('[data-cart-summary]');
+    var layoutEl = document.querySelector('.cart-layout');
 
     function changeQty(id, delta) {
       var cart = readCart();
@@ -67,11 +68,13 @@
             '<a href="products.html" class="btn-solid-cta cart-empty__cta">Tiếp tục mua sắm</a>' +
           '</div>';
         if (summaryEl) summaryEl.hidden = true;
+        if (layoutEl) layoutEl.classList.add('is-empty');
         updateCartBadges();
         return;
       }
 
       if (summaryEl) summaryEl.hidden = false;
+      if (layoutEl) layoutEl.classList.remove('is-empty');
       var subtotal = 0;
       container.innerHTML = ids.map(function (id) {
         var product = findProduct(id);

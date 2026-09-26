@@ -3269,6 +3269,14 @@ table {
   align-items: start;
 }
 
+/* An explicit grid column still reserves its space even when the item
+   inside it is display:none, so an empty cart otherwise leaves a dead gap
+   where the summary sidebar used to be. Collapse to one column instead. */
+.cart-layout:has(.cart-summary[hidden]),
+.cart-layout.is-empty {
+  grid-template-columns: 1fr;
+}
+
 .cart-items {
   display: flex;
   flex-direction: column;
