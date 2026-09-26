@@ -78,8 +78,22 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--maroon-dark);
+/* Mobile touch polish: kill the default gray/blue tap-flash so our own
+   :active feedback below is the only "pressed" state a finger sees, and
+   tell the browser these are simple taps (no need to wait and see if a
+   double-tap/zoom gesture is coming) so presses register immediately. */
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button:active,
+a:active {
+  opacity: .7;
 }
 
 ul {
@@ -100,6 +114,17 @@ table {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::selection {
@@ -237,10 +262,6 @@ table {
   font-weight: 600;
 }
 
-.topbar__support:hover {
-  color: #fff;
-}
-
 .topbar__social {
   display: flex;
   gap: 12px;
@@ -249,10 +270,6 @@ table {
 
 .topbar__social a {
   color: var(--text-light);
-}
-
-.topbar__social a:hover {
-  color: var(--gold);
 }
 
 .icon-gold {
@@ -373,10 +390,6 @@ table {
   align-items: center;
 }
 
-.header-search__submit:hover {
-  background: var(--maroon-dark);
-}
-
 .header-actions {
   display: flex;
   gap: 18px;
@@ -391,11 +404,6 @@ table {
   align-items: center;
   color: var(--text-main);
   position: relative;
-}
-
-.header-account:hover,
-.header-cart:hover {
-  color: var(--maroon);
 }
 
 .header-actions__label {
@@ -465,7 +473,6 @@ table {
   text-transform: uppercase;
 }
 
-.desktop-nav__link:hover,
 .desktop-nav__link.is-active {
   color: var(--maroon);
 }
@@ -534,8 +541,8 @@ table {
 }
 
 .drawer__close {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 9px;
   background: rgba(255, 255, 255, .12);
   color: #fff;
@@ -558,11 +565,6 @@ table {
   font-size: 15px;
   color: var(--text-main);
   border-bottom: 1px solid #f2e8dc;
-}
-
-.drawer__link:hover {
-  background: var(--bg-alt);
-  color: var(--maroon);
 }
 
 /* Bottom mobile nav */
@@ -592,10 +594,6 @@ table {
   font-size: 11px;
   font-weight: 600;
   position: relative;
-}
-
-.bottom-nav__item:hover {
-  color: var(--maroon);
 }
 
 .bottom-nav__badge {
@@ -683,12 +681,6 @@ table {
   align-items: center;
   box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
   transition: transform .2s, background .2s;
-}
-
-.btn-cta:hover {
-  background: var(--gold-hover);
-  color: var(--brown-dark);
-  transform: translateY(-2px);
 }
 
 .hero__usps {
@@ -781,8 +773,8 @@ table {
 }
 
 .hero__arrow {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, .14);
   color: #fff;
@@ -791,26 +783,27 @@ table {
   justify-content: center;
 }
 
-.hero__arrow:hover {
-  background: rgba(255, 255, 255, .28);
-}
-
 .hero__dots {
   display: flex;
-  gap: 9px;
 }
 
+/* The visible dot stays 9x9 (26x9 when active) via background-clip, but
+   padding pushes the actual tap target out to a comfortable ~29-46px —
+   same look, a finger can actually hit it. */
 .hero__dot {
   width: 9px;
   height: 9px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .4);
+  background-clip: content-box;
+  box-sizing: content-box;
   border-radius: 9px;
-  background: rgba(255, 255, 255, .4);
   transition: all .3s;
 }
 
 .hero__dot.is-active {
   width: 26px;
-  background: var(--gold);
+  background-color: var(--gold);
 }
 
 /* ==========================================================================
@@ -871,10 +864,6 @@ table {
   color: var(--text-main);
 }
 
-.category-card:hover {
-  color: var(--maroon);
-}
-
 .category-card__img {
   --ph-size: 9px;
   width: 96px;
@@ -886,10 +875,6 @@ table {
   font-size: 10px;
   padding: 8px;
   text-align: center;
-}
-
-.category-card:hover .category-card__img {
-  border-color: var(--gold);
 }
 
 .category-card__name {
@@ -921,11 +906,6 @@ table {
   display: flex;
   flex-direction: column;
   transition: transform .25s, box-shadow .25s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-card);
 }
 
 .product-card__media {
@@ -988,10 +968,6 @@ table {
   color: var(--text-main);
 }
 
-.product-card__name a:hover {
-  color: var(--maroon);
-}
-
 .product-card__rating {
   display: flex;
   align-items: center;
@@ -1044,10 +1020,6 @@ table {
   min-height: 44px;
 }
 
-.btn-add:hover {
-  background: var(--maroon-dark);
-}
-
 /* ==========================================================================
    Promo banners
    ========================================================================== */
@@ -1070,8 +1042,11 @@ table {
 }
 
 .promo-card--1 { background: var(--maroon-dark); }
+
 .promo-card--2 { background: var(--maroon); }
+
 .promo-card--3 { background: #7a1726; }
+
 .promo-card--4 { background: var(--maroon-darker); }
 
 .promo-card__title {
@@ -1109,10 +1084,6 @@ table {
   letter-spacing: .5px;
   padding: 9px 16px;
   border-radius: 9px;
-}
-
-.promo-card__cta:hover {
-  background: var(--gold-hover);
 }
 
 .countdown {
@@ -1155,10 +1126,6 @@ table {
 .featured-card {
   display: block;
   color: var(--text-main);
-}
-
-.featured-card:hover {
-  color: var(--maroon);
 }
 
 .featured-card__img {
@@ -1306,8 +1273,8 @@ table {
 }
 
 .carousel-arrow {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #fff;
   border: 1px solid var(--border);
@@ -1315,11 +1282,6 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.carousel-arrow:hover {
-  background: var(--maroon);
-  color: #fff;
 }
 
 /* ==========================================================================
@@ -1371,10 +1333,6 @@ table {
   justify-content: center;
   box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
   transition: transform .2s;
-}
-
-.story-video__play:hover {
-  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .story-video__title {
@@ -1458,10 +1416,6 @@ table {
   align-items: center;
 }
 
-.btn-outline-cta:hover {
-  background: var(--maroon-dark);
-}
-
 /* Video modal */
 .video-modal {
   position: fixed;
@@ -1487,18 +1441,14 @@ table {
   position: absolute;
   top: -46px;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, .15);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.video-modal__close:hover {
-  background: rgba(255, 255, 255, .3);
 }
 
 .video-modal__screen {
@@ -1533,10 +1483,6 @@ table {
   font-size: 10px;
 }
 
-.insta-tile:hover {
-  opacity: .85;
-}
-
 .insta-tile--more {
   background: var(--maroon);
   color: var(--text-lighter);
@@ -1546,11 +1492,6 @@ table {
   font-weight: 700;
   font-size: 13px;
   padding: 10px;
-}
-
-.insta-tile--more:hover {
-  background: var(--maroon-dark);
-  color: var(--text-lighter);
 }
 
 /* ==========================================================================
@@ -1608,10 +1549,6 @@ table {
   font-size: 13px;
   letter-spacing: .5px;
   padding: 0 24px;
-}
-
-.newsletter__submit:hover {
-  background: var(--gold-hover);
 }
 
 .newsletter__msg {
@@ -1725,11 +1662,6 @@ table {
   justify-content: center;
 }
 
-.footer-social a:hover {
-  background: var(--maroon);
-  color: #fff;
-}
-
 .footer-heading {
   font-size: 15px;
   font-weight: 800;
@@ -1746,10 +1678,6 @@ table {
 .footer-links a {
   font-size: 13px;
   color: var(--footer-text-muted);
-}
-
-.footer-links a:hover {
-  color: var(--footer-heading);
 }
 
 .footer-contact {
@@ -1831,10 +1759,6 @@ table {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-}
-
-.back-top:hover {
-  background: var(--maroon-dark);
 }
 
 /* Toast */
@@ -1987,10 +1911,6 @@ table {
   align-items: center;
 }
 
-.filter-btn:hover {
-  background: var(--bg-alt);
-}
-
 .filter-btn.is-active {
   font-weight: 800;
   color: var(--maroon);
@@ -2099,10 +2019,6 @@ table {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-}
-
-.pagination a:hover {
-  border-color: var(--gold);
 }
 
 .pagination a[aria-current="page"] {
@@ -2275,10 +2191,6 @@ table {
   min-height: 48px;
 }
 
-.btn-add-cart:hover {
-  background: var(--maroon-dark);
-}
-
 .btn-buy-now {
   min-width: 120px;
   text-align: center;
@@ -2292,10 +2204,6 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.btn-buy-now:hover {
-  background: var(--gold-hover);
 }
 
 .detail-promises {
@@ -2628,11 +2536,6 @@ table {
   border-radius: var(--radius-sm);
 }
 
-.btn-solid-cta:hover {
-  background: var(--maroon-dark);
-  color: #fff;
-}
-
 /* ==========================================================================
    Contact page
    ========================================================================== */
@@ -2764,10 +2667,6 @@ table {
   min-height: 48px;
 }
 
-.btn-block:hover {
-  background: var(--maroon-dark);
-}
-
 .form-msg {
   font-size: 13px;
   font-weight: 600;
@@ -2793,11 +2692,6 @@ table {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  color: inherit;
-}
-
-.news-featured:hover {
-  box-shadow: var(--shadow-card);
   color: inherit;
 }
 
@@ -2861,10 +2755,6 @@ table {
   border: 1px solid var(--border);
 }
 
-.tag-btn:hover {
-  border-color: var(--gold);
-}
-
 .tag-btn.is-active {
   color: #fff;
   background: var(--maroon);
@@ -2885,11 +2775,6 @@ table {
   display: flex;
   flex-direction: column;
   transition: transform .25s, box-shadow .25s;
-}
-
-.news-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-card);
 }
 
 .news-card__media {
@@ -2921,10 +2806,6 @@ table {
 
 .news-card__title a {
   color: var(--text-main);
-}
-
-.news-card__title a:hover {
-  color: var(--maroon);
 }
 
 .news-card__excerpt {
@@ -3052,11 +2933,6 @@ table {
   justify-content: center;
 }
 
-.share-list a:hover {
-  background: var(--maroon);
-  color: #fff;
-}
-
 .article-aside {
   flex: 1 1 280px;
   min-width: 0;
@@ -3089,11 +2965,6 @@ table {
   display: flex;
   gap: 12px;
   align-items: center;
-  color: inherit;
-}
-
-.related-item:hover {
-  opacity: .85;
   color: inherit;
 }
 
@@ -3132,11 +3003,6 @@ table {
   font-size: 14px;
   padding: 13px;
   border-radius: 11px;
-}
-
-.btn-cta-block:hover {
-  background: var(--maroon-dark);
-  color: #fff;
 }
 
 /* ==========================================================================
@@ -3182,10 +3048,6 @@ table {
   display: flex;
   gap: 10px;
   align-items: center;
-}
-
-.policy-nav-btn:hover {
-  background: var(--bg-alt);
 }
 
 .policy-nav-btn.is-active {
@@ -3304,10 +3166,6 @@ table {
   color: var(--text-main);
 }
 
-.cart-line__name:hover {
-  color: var(--maroon);
-}
-
 .cart-line__price {
   font-size: 13px;
   color: var(--text-muted);
@@ -3343,11 +3201,6 @@ table {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
-
-.cart-line__remove:hover {
-  background: #fbe9e7;
-  color: #c0392b;
 }
 
 .cart-empty {
@@ -3392,11 +3245,6 @@ table {
   font-size: 15px;
   padding: 13px 28px;
   border-radius: var(--radius-sm);
-}
-
-.btn-outline:hover {
-  background: var(--maroon);
-  color: #fff;
 }
 
 .cart-summary {
@@ -3697,4 +3545,204 @@ table {
   font-size: 14px;
   text-align: center;
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Hover-only affordances
+   Guarded so touch devices never get a hover style stuck "on" after a tap
+   (the classic mobile sticky-hover bug). Devices with a real pointer still
+   get every hover effect exactly as before.
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    color: var(--maroon-dark);
+  }
+
+  .topbar__support:hover {
+    color: #fff;
+  }
+
+  .topbar__social a:hover {
+    color: var(--gold);
+  }
+
+  .header-search__submit:hover {
+    background: var(--maroon-dark);
+  }
+
+  .header-account:hover,
+  .header-cart:hover {
+    color: var(--maroon);
+  }
+
+  .desktop-nav__link:hover {
+    color: var(--maroon);
+  }
+
+  .drawer__link:hover {
+    background: var(--bg-alt);
+    color: var(--maroon);
+  }
+
+  .bottom-nav__item:hover {
+    color: var(--maroon);
+  }
+
+  .btn-cta:hover {
+    background: var(--gold-hover);
+    color: var(--brown-dark);
+    transform: translateY(-2px);
+  }
+
+  .hero__arrow:hover {
+    background: rgba(255, 255, 255, .28);
+  }
+
+  .category-card:hover {
+    color: var(--maroon);
+  }
+
+  .category-card:hover .category-card__img {
+    border-color: var(--gold);
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .product-card__name a:hover {
+    color: var(--maroon);
+  }
+
+  .btn-add:hover {
+    background: var(--maroon-dark);
+  }
+
+  .promo-card__cta:hover {
+    background: var(--gold-hover);
+  }
+
+  .featured-card:hover {
+    color: var(--maroon);
+  }
+
+  .carousel-arrow:hover {
+    background: var(--maroon);
+    color: #fff;
+  }
+
+  .story-video__play:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .btn-outline-cta:hover {
+    background: var(--maroon-dark);
+  }
+
+  .video-modal__close:hover {
+    background: rgba(255, 255, 255, .3);
+  }
+
+  .insta-tile:hover {
+    opacity: .85;
+  }
+
+  .insta-tile--more:hover {
+    background: var(--maroon-dark);
+    color: var(--text-lighter);
+  }
+
+  .newsletter__submit:hover {
+    background: var(--gold-hover);
+  }
+
+  .footer-social a:hover {
+    background: var(--maroon);
+    color: #fff;
+  }
+
+  .footer-links a:hover {
+    color: var(--footer-heading);
+  }
+
+  .back-top:hover {
+    background: var(--maroon-dark);
+  }
+
+  .filter-btn:hover {
+    background: var(--bg-alt);
+  }
+
+  .pagination a:hover {
+    border-color: var(--gold);
+  }
+
+  .btn-add-cart:hover {
+    background: var(--maroon-dark);
+  }
+
+  .btn-buy-now:hover {
+    background: var(--gold-hover);
+  }
+
+  .btn-solid-cta:hover {
+    background: var(--maroon-dark);
+    color: #fff;
+  }
+
+  .btn-block:hover {
+    background: var(--maroon-dark);
+  }
+
+  .news-featured:hover {
+    box-shadow: var(--shadow-card);
+    color: inherit;
+  }
+
+  .tag-btn:hover {
+    border-color: var(--gold);
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .news-card__title a:hover {
+    color: var(--maroon);
+  }
+
+  .share-list a:hover {
+    background: var(--maroon);
+    color: #fff;
+  }
+
+  .related-item:hover {
+    opacity: .85;
+    color: inherit;
+  }
+
+  .btn-cta-block:hover {
+    background: var(--maroon-dark);
+    color: #fff;
+  }
+
+  .policy-nav-btn:hover {
+    background: var(--bg-alt);
+  }
+
+  .cart-line__name:hover {
+    color: var(--maroon);
+  }
+
+  .cart-line__remove:hover {
+    background: #fbe9e7;
+    color: #c0392b;
+  }
+
+  .btn-outline:hover {
+    background: var(--maroon);
+    color: #fff;
+  }
 }
