@@ -107,6 +107,57 @@ table {
   color: #fff;
 }
 
+/* ==========================================================================
+   Shared "photo placeholder" pattern
+   Every image stand-in across the site (product photos, avatars, gallery,
+   article covers...) uses the same diagonal-stripe swatch. The stripe width
+   is the only thing that varies per usage, so each consuming selector just
+   sets --ph-size; swap these two rules out once real <img> tags replace
+   the placeholders.
+   ========================================================================== */
+.category-card__img,
+.product-card__img,
+.featured-card__img,
+.review-card__avatar,
+.review-card__photo,
+.insta-tile,
+.gallery-main,
+.gallery-thumb,
+.content-photo,
+.news-featured__media,
+.news-card__media,
+.article-meta__avatar,
+.article-cover,
+.related-item__thumb,
+.cart-line__img {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--placeholder-1),
+    var(--placeholder-1) var(--ph-size, 10px),
+    var(--placeholder-2) var(--ph-size, 10px),
+    var(--placeholder-2) calc(var(--ph-size, 10px) * 2)
+  );
+}
+
+.category-card__img,
+.product-card__img,
+.featured-card__img,
+.review-card__photo,
+.insta-tile,
+.gallery-main,
+.gallery-thumb,
+.content-photo,
+.news-featured__media,
+.news-card__media,
+.article-cover,
+.cart-line__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  color: #8a755f;
+}
+
 .container {
   max-width: 1240px;
   margin: 0 auto;
@@ -825,19 +876,14 @@ table {
 }
 
 .category-card__img {
-  display: flex;
+  --ph-size: 9px;
   width: 96px;
   height: 96px;
   margin: 0 auto 12px;
   border-radius: 50%;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 9px, var(--placeholder-2) 9px, var(--placeholder-2) 18px);
   border: 3px solid #fff;
   box-shadow: 0 6px 16px rgba(59, 36, 27, .1);
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 10px;
-  color: #8a755f;
   padding: 8px;
   text-align: center;
 }
@@ -888,13 +934,7 @@ table {
 
 .product-card__img {
   aspect-ratio: 1;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 10px, var(--placeholder-2) 10px, var(--placeholder-2) 20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 11px;
-  color: #8a755f;
   text-align: center;
   padding: 10px;
 }
@@ -1122,17 +1162,11 @@ table {
 }
 
 .featured-card__img {
-  display: flex;
   aspect-ratio: 1.05;
   border-radius: 14px;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 10px, var(--placeholder-2) 10px, var(--placeholder-2) 20px);
   border: 1px solid var(--border);
   margin-bottom: 12px;
-  font-family: ui-monospace, monospace;
   font-size: 11px;
-  color: #8a755f;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 6px 16px rgba(59, 36, 27, .08);
 }
 
@@ -1232,10 +1266,10 @@ table {
 }
 
 .review-card__avatar {
+  --ph-size: 6px;
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 6px, var(--placeholder-2) 6px, var(--placeholder-2) 12px);
   flex-shrink: 0;
 }
 
@@ -1259,16 +1293,11 @@ table {
 }
 
 .review-card__photo {
+  --ph-size: 9px;
   margin-top: 12px;
   height: 96px;
   border-radius: 10px;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 9px, var(--placeholder-2) 9px, var(--placeholder-2) 18px);
-  font-family: ui-monospace, monospace;
   font-size: 10px;
-  color: #8a755f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .carousel-arrows {
@@ -1498,15 +1527,10 @@ table {
 }
 
 .insta-tile {
+  --ph-size: 9px;
   aspect-ratio: 1;
   border-radius: 12px;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 9px, var(--placeholder-2) 9px, var(--placeholder-2) 18px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 10px;
-  color: #8a755f;
 }
 
 .insta-tile:hover {
@@ -2098,16 +2122,11 @@ table {
 }
 
 .gallery-main {
+  --ph-size: 12px;
   aspect-ratio: 1;
   border-radius: var(--radius-lg);
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 13px;
-  color: #8a755f;
 }
 
 .gallery-thumbs {
@@ -2118,17 +2137,12 @@ table {
 }
 
 .gallery-thumb {
+  --ph-size: 8px;
   aspect-ratio: 1;
   border-radius: 11px;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 8px, var(--placeholder-2) 8px, var(--placeholder-2) 16px);
   border: 2px solid var(--border);
   cursor: pointer;
-  font-family: ui-monospace, monospace;
   font-size: 9px;
-  color: #8a755f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .gallery-thumb.is-active {
@@ -2453,16 +2467,11 @@ table {
 }
 
 .content-photo {
+  --ph-size: 12px;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-lg);
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 12px;
-  color: #8a755f;
   text-align: center;
   padding: 12px;
 }
@@ -2793,14 +2802,9 @@ table {
 }
 
 .news-featured__media {
+  --ph-size: 12px;
   min-height: 280px;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 12px;
-  color: #8a755f;
 }
 
 .news-featured__body {
@@ -2890,13 +2894,7 @@ table {
 
 .news-card__media {
   aspect-ratio: 16 / 10;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 10px, var(--placeholder-2) 10px, var(--placeholder-2) 20px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 11px;
-  color: #8a755f;
 }
 
 .news-card__body {
@@ -2986,23 +2984,18 @@ table {
 }
 
 .article-meta__avatar {
+  --ph-size: 6px;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 6px, var(--placeholder-2) 6px, var(--placeholder-2) 12px);
 }
 
 .article-cover {
+  --ph-size: 12px;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-lg);
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
   border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 12px;
-  color: #8a755f;
   margin-bottom: 26px;
 }
 
@@ -3105,11 +3098,11 @@ table {
 }
 
 .related-item__thumb {
+  --ph-size: 8px;
   width: 72px;
   height: 56px;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 8px, var(--placeholder-2) 8px, var(--placeholder-2) 16px);
 }
 
 .related-item__title {
@@ -3289,16 +3282,11 @@ table {
 }
 
 .cart-line__img {
+  --ph-size: 8px;
   width: 84px;
   height: 84px;
   border-radius: var(--radius-sm);
-  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 8px, var(--placeholder-2) 8px, var(--placeholder-2) 16px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: ui-monospace, monospace;
   font-size: 10px;
-  color: #8a755f;
   text-align: center;
   padding: 6px;
 }
@@ -3534,7 +3522,8 @@ table {
   font-size: 14px;
 }
 
-.payment-method:has(input:checked) {
+.payment-method:has(input:checked),
+.payment-method.is-selected {
   border-color: var(--maroon);
   background: #fbf3e9;
 }
