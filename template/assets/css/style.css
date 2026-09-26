@@ -4513,6 +4513,174 @@ table {
   color: #fff;
 }
 
+/* Buying guide: how to spot the genuine article vs. low-quality imitations */
+.story-compare {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.story-compare__col {
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  border: 1px solid var(--border);
+}
+
+.story-compare__col--good {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.story-compare__col--bad {
+  border-color: var(--error);
+  background: var(--error-bg);
+}
+
+.story-compare__heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.story-compare__col--good .story-compare__heading {
+  color: var(--success);
+}
+
+.story-compare__col--bad .story-compare__heading {
+  color: var(--error);
+}
+
+.story-compare__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.story-compare__list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.story-compare__list svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.story-compare__col--good svg {
+  color: var(--success);
+}
+
+.story-compare__col--bad svg {
+  color: var(--error);
+}
+
+/* Recipe suggestions */
+.story-recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.story-recipe-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.story-recipe-card__img {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: #8a755f;
+  text-align: center;
+  padding: 16px;
+  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
+}
+
+.story-recipe-card__body {
+  padding: 20px;
+}
+
+.story-recipe-card__title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.story-recipe-card__text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Customer reviews specific to a story page (static grid, no carousel) */
+.story-reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.story-review-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.story-review-card__head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.story-review-card__avatar {
+  --ph-size: 6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 6px, var(--placeholder-2) 6px, var(--placeholder-2) 12px);
+}
+
+.story-review-card__name {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.story-review-card__stars {
+  display: block;
+  color: var(--star);
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+.story-review-card__text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
 /* Scroll-reveal utility, shared with the fade-in-on-scroll behaviour */
 .reveal {
   opacity: 0;
