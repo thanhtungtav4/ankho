@@ -150,12 +150,17 @@ function initDrawer() {
 function initBackToTop() {
   var btn = document.querySelector('[data-back-top]');
   if (!btn) return;
-  function onScroll() {
-    if (window.scrollY > 400) btn.classList.add('is-visible');
-    else btn.classList.remove('is-visible');
+  var ticking = false;
+  function update() {
+    ticking = false;
+    btn.classList.toggle('is-visible', window.scrollY > 400);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
   btn.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
@@ -172,7 +177,10 @@ function initFloatingAutoHide() {
     ticking = false;
     var y = window.scrollY;
     if (Math.abs(y - lastY) < 8) return;
-    document.body.classList.toggle('is-scrolling-down', y > lastY && y > 200);
+    /* At the end of the page there is no further "scroll up" to bring the
+       contact buttons back, so keep them visible there. */
+    var nearBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 120;
+    document.body.classList.toggle('is-scrolling-down', y > lastY && y > 200 && !nearBottom);
     lastY = y;
   }
   window.addEventListener('scroll', function () {

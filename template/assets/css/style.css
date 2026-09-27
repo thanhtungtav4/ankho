@@ -895,7 +895,6 @@ table {
   max-width: 520px;
 }
 
-
 .hero__usp {
   display: flex;
   gap: 11px;
@@ -1392,6 +1391,13 @@ table {
   .btn-add svg {
     width: 15px;
     height: 15px;
+  }
+}
+
+/* 320px phones: a ~108px button can't fit icon + label on one line */
+@media (max-width: 360px) {
+  .btn-add svg {
+    display: none;
   }
 }
 
@@ -2677,6 +2683,15 @@ table {
     background: #fff;
     font-size: 13px;
     white-space: nowrap;
+  }
+
+  /* Mirror the category chips' selected state so the active price range
+     reads at a glance, not only through the small native radio dot. */
+  .price-filter label:has(input:checked) {
+    border-color: var(--maroon);
+    color: var(--maroon);
+    font-weight: 700;
+    background: var(--bg-alt);
   }
 
   .results-bar {

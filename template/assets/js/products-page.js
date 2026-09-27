@@ -15,7 +15,17 @@
 
     var params = new URLSearchParams(window.location.search);
     var priceFilter = document.querySelector('[data-price-filter]');
-    var state = { cat: params.get('cat') || 'all', sort: 'popular', price: 'all', query: (params.get('q') || '').trim() };
+    var paginationEl = document.querySelector('.pagination');
+    /* Read the controls' current values rather than assuming defaults: the
+       browser can restore a previously checked radio / selected option on
+       reload or back-navigation, and the grid must match what is shown. */
+    var checkedPrice = priceFilter && priceFilter.querySelector('input[name="price"]:checked');
+    var state = {
+      cat: params.get('cat') || 'all',
+      sort: sortSelect ? sortSelect.value : 'popular',
+      price: checkedPrice ? checkedPrice.value : 'all',
+      query: (params.get('q') || '').trim()
+    };
     var PRICE_RANGES = {
       lt150: function (p) { return p < 150000; },
       '150-300': function (p) { return p >= 150000 && p <= 300000; },
@@ -63,6 +73,7 @@
         ? list.map(productCardHTML).join('')
         : '<p class="empty-state">Không tìm thấy sản phẩm phù hợp' + (state.query ? ' với "' + escapeHtml(state.query) + '"' : '') + '.</p>';
       if (countEl) countEl.textContent = String(list.length);
+      if (paginationEl) paginationEl.hidden = !list.length;
       if (searchInfoEl) {
         searchInfoEl.textContent = state.query ? ' cho "' + state.query + '"' : '';
       }
@@ -91,6 +102,20 @@
 
     renderFilters();
     renderGrid();
+
+    /* On phones the filters are horizontal chip rows; arriving with
+       ?cat=combo (or a restored price choice) would leave the active chip
+       off-screen to the right. Only the row is scrolled (scrollIntoView
+       could also jump the page). */
+    function revealChip(row, chip) {
+      if (!row || !chip || row.scrollWidth <= row.clientWidth) return;
+      row.scrollLeft += chip.getBoundingClientRect().left - row.getBoundingClientRect().left - 24;
+    }
+    if (state.cat !== 'all') revealChip(filterList, filterList && filterList.querySelector('.is-active'));
+    if (state.price !== 'all') {
+      var checked = priceFilter && priceFilter.querySelector('input[name="price"]:checked');
+      revealChip(priceFilter, checked && checked.closest('li'));
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
