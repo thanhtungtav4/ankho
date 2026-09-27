@@ -14,7 +14,13 @@
     var searchInfoEl = document.querySelector('[data-search-info]');
 
     var params = new URLSearchParams(window.location.search);
-    var state = { cat: params.get('cat') || 'all', sort: 'popular', query: (params.get('q') || '').trim() };
+    var priceFilter = document.querySelector('[data-price-filter]');
+    var state = { cat: params.get('cat') || 'all', sort: 'popular', price: 'all', query: (params.get('q') || '').trim() };
+    var PRICE_RANGES = {
+      lt150: function (p) { return p < 150000; },
+      '150-300': function (p) { return p >= 150000 && p <= 300000; },
+      gt300: function (p) { return p > 300000; }
+    };
 
     var searchInput = document.getElementById('siteSearchInput');
     if (searchInput && state.query) searchInput.value = state.query;
@@ -42,6 +48,9 @@
 
     function renderGrid() {
       var list = state.cat === 'all' ? PRODUCTS.slice() : PRODUCTS.filter(function (p) { return p.cat === state.cat; });
+      if (PRICE_RANGES[state.price]) {
+        list = list.filter(function (p) { return PRICE_RANGES[state.price](p.price); });
+      }
       if (state.query) {
         var q = state.query.toLowerCase();
         list = list.filter(function (p) { return p.name.toLowerCase().indexOf(q) !== -1; });
@@ -63,6 +72,14 @@
     if (state.query) {
       var clearLink = document.querySelector('[data-clear-search]');
       if (clearLink) clearLink.hidden = false;
+    }
+
+    if (priceFilter) {
+      priceFilter.addEventListener('change', function (e) {
+        if (e.target.name !== 'price') return;
+        state.price = e.target.value;
+        renderGrid();
+      });
     }
 
     if (sortSelect) {

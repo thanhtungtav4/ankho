@@ -895,11 +895,6 @@ table {
   max-width: 520px;
 }
 
-@media (max-width: 420px) {
-  .hero__usps {
-    grid-template-columns: 1fr;
-  }
-}
 
 .hero__usp {
   display: flex;
@@ -920,6 +915,30 @@ table {
   justify-content: center;
   flex-shrink: 0;
   color: var(--gold);
+}
+
+/* Phones: keep the 4 USPs as a compact 2 x 2 instead of a 4-row column */
+@media (max-width: 420px) {
+  .hero__usps {
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero__usp {
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .hero__usp-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero__usp-icon svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .hero__visual {
@@ -1065,6 +1084,30 @@ table {
   align-items: center;
   font-weight: 700;
   font-size: 14px;
+}
+
+/* Phones: smaller section titles so "Xem tất cả" stays on the title row */
+@media (max-width: 640px) {
+  .section {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .section-head {
+    flex-wrap: nowrap;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .section-link {
+    flex-shrink: 0;
+    font-size: 13px;
+  }
 }
 
 /* ==========================================================================
@@ -1274,6 +1317,84 @@ table {
   min-height: 44px;
 }
 
+/* Phones: 2 products per row (the 180px minimum fell back to 1 column,
+   so shoppers saw one product per screen). Card internals are tightened
+   to fit a ~165px column. */
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product-card {
+    border-radius: 12px;
+  }
+
+  .product-card__badge {
+    top: 8px;
+    left: 8px;
+    font-size: 10px;
+    padding: 4px 7px;
+    border-radius: 6px;
+  }
+
+  .product-card__body {
+    padding: 10px;
+    gap: 5px;
+  }
+
+  .product-card__cat {
+    font-size: 10px;
+  }
+
+  .product-card__name {
+    font-size: 13px;
+    line-height: 1.35;
+    min-height: calc(13px * 1.35 * 2);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .product-card__rating,
+  .product-card__sold {
+    font-size: 11px;
+  }
+
+  .product-card__rating .stars {
+    letter-spacing: 0;
+  }
+
+  .product-card__price-row {
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 6px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+
+  .price--old {
+    font-size: 11px;
+  }
+
+  .btn-add {
+    font-size: 12px;
+    padding: 8px 6px;
+    gap: 6px;
+    min-height: 40px;
+    border-radius: 9px;
+  }
+
+  .btn-add svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
 /* ==========================================================================
    Promo banners
    ========================================================================== */
@@ -1442,6 +1563,39 @@ table {
   color: var(--text-muted);
 }
 
+/* Phones: 5 featured cards stacked one per row were ~2 screens tall; a
+   swipeable row shows ~2.3 cards so the next one hints there's more. */
+@media (max-width: 640px) {
+  .featured-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    margin: 0 -24px;
+    padding: 0 24px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .featured-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featured-card {
+    flex: 0 0 40%;
+    scroll-snap-align: start;
+  }
+
+  .featured-card__img {
+    margin-bottom: 8px;
+  }
+
+  .featured-card__name {
+    font-size: 14px;
+  }
+}
+
 /* ==========================================================================
    Stats
    ========================================================================== */
@@ -1490,6 +1644,22 @@ table {
   max-width: 170px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 12px;
+  }
+
+  /* 5 stats: the last one spans the row instead of sitting alone on the left */
+  .stat-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .stat-item__value {
+    font-size: 26px;
+  }
 }
 
 /* ==========================================================================
@@ -1779,9 +1949,28 @@ table {
   flex-direction: column;
   gap: 8px;
   text-align: center;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 13px;
   padding: 10px;
+}
+
+@media (max-width: 640px) {
+  .insta-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .insta-tile--more {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+    flex-direction: row;
+    min-height: 52px;
+  }
+
+  .insta-tile--more br {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -2118,11 +2307,20 @@ table {
     left: 14px;
     bottom: 82px;
     gap: 10px;
+    transition: transform .3s ease, opacity .25s ease, visibility 0s;
   }
 
   .quick-contact__btn {
     width: 46px;
     height: 46px;
+  }
+
+  body.is-scrolling-down .quick-contact,
+  body.is-scrolling-down .back-top {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform .3s ease, opacity .25s ease, visibility 0s linear .25s;
   }
 }
 
@@ -2390,6 +2588,112 @@ table {
   background: var(--maroon);
   border-color: var(--maroon);
   color: #fff;
+}
+
+/* Phones/tablets: the filter box stacked above the results but stayed
+   position: sticky, so while scrolling it stuck to the top and the
+   product grid slid underneath it. It also filled a whole screen before
+   the first product. Here it becomes two swipeable chip rows. */
+@media (max-width: 780px) {
+  .listing-layout {
+    padding: 16px 24px 28px;
+    gap: 14px;
+  }
+
+  .filters {
+    position: static;
+    flex: 1 1 100%;
+    max-width: none;
+    min-width: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .filters__heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .filter-list,
+  .price-filter {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    margin: 0 -24px;
+    padding: 0 24px 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-list::-webkit-scrollbar,
+  .price-filter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .price-filter {
+    margin-top: 10px;
+  }
+
+  .filter-list li,
+  .price-filter li {
+    flex-shrink: 0;
+  }
+
+  .filter-btn {
+    width: auto;
+    min-height: 38px;
+    padding: 8px 14px;
+    gap: 6px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* extra class so the desktop-only :hover background can't wash it out */
+  .filter-list .filter-btn.is-active {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: #fff;
+  }
+
+  .filter-btn.is-active .filter-btn__count {
+    color: rgba(255, 255, 255, .75);
+  }
+
+  .price-filter label {
+    min-height: 36px;
+    padding: 6px 12px;
+    gap: 6px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .results-bar {
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .results-bar__count,
+  .sort-select-wrap,
+  .sort-select {
+    font-size: 13px;
+  }
+
+  .sort-select {
+    padding: 7px 10px;
+  }
 }
 
 /* ==========================================================================

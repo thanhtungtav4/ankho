@@ -161,6 +161,27 @@ function initBackToTop() {
   });
 }
 
+/* Floating buttons (Zalo/call, back-to-top) cover product text in the
+   2-column mobile grid, so they step aside while the shopper scrolls down
+   through products and come back as soon as they scroll up. The CSS only
+   applies this on small screens. */
+function initFloatingAutoHide() {
+  var lastY = window.scrollY;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var y = window.scrollY;
+    if (Math.abs(y - lastY) < 8) return;
+    document.body.classList.toggle('is-scrolling-down', y > lastY && y > 200);
+    lastY = y;
+  }
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+}
+
 function initScrollToProducts() {
   document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -237,6 +258,7 @@ initAddToCartButtons();
 initBuyNowButtons();
 initDrawer();
 initBackToTop();
+initFloatingAutoHide();
 initScrollToProducts();
 initFocusSearch();
 initNewsletterForms();
