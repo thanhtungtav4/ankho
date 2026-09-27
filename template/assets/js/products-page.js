@@ -77,7 +77,6 @@
       if (searchInfoEl) {
         searchInfoEl.textContent = state.query ? ' cho "' + state.query + '"' : '';
       }
-      initAddToCartButtons();
     }
 
     if (state.query) {

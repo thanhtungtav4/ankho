@@ -120,6 +120,20 @@ function computeTotals(subtotal, code) {
   };
 }
 
+/* Writes computeTotals() output into a summary box (cart or checkout).
+   els holds the target elements; any of them may be missing. */
+function renderSummaryTotals(els, totals) {
+  if (els.subtotal) els.subtotal.textContent = formatPrice(totals.subtotal);
+  if (els.shipping) els.shipping.textContent = totals.shipping === 0 ? 'Miễn phí' : formatPrice(totals.shipping);
+  if (els.total) els.total.textContent = formatPrice(totals.total);
+  if (els.discountRow) els.discountRow.hidden = !totals.discount;
+  if (els.discount) els.discount.textContent = '−' + formatPrice(totals.discount);
+  if (els.couponNote) {
+    els.couponNote.textContent = totals.couponNote;
+    els.couponNote.hidden = !totals.couponNote;
+  }
+}
+
 /* Wires a [data-coupon-form] block; onChange re-renders the host summary. */
 function initCouponForm(root, onChange) {
   if (!root) return;
@@ -150,6 +164,10 @@ function initCouponForm(root, onChange) {
       return;
     }
     writeCoupon(code);
+    if (readCoupon() !== code) {
+      setFormMsg(msg, 'Không thể lưu mã giảm giá trên trình duyệt này.', false);
+      return;
+    }
     input.value = '';
     setFormMsg(msg, 'Đã áp dụng mã ' + code + '.', true);
     sync();

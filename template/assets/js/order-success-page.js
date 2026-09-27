@@ -31,6 +31,18 @@
         return orderSummaryLineHTML(it.name, it.qty, it.price * it.qty);
       }).join('');
     }
+    /* Show how the lines add up to the total (discount code, shipping),
+       otherwise a discounted total looks lower than the items listed. */
+    function showRow(key, text) {
+      var row = document.querySelector('[data-order-success-' + key + '-row]');
+      var valueEl = document.querySelector('[data-order-success-' + key + ']');
+      if (!row || !valueEl) return;
+      valueEl.textContent = text;
+      row.hidden = false;
+    }
+    if (typeof order.subtotal === 'number') showRow('subtotal', formatPrice(order.subtotal));
+    if (order.discount) showRow('discount', '−' + formatPrice(order.discount) + (order.coupon ? ' (' + order.coupon + ')' : ''));
+    if (typeof order.shipping === 'number') showRow('shipping', order.shipping === 0 ? 'Miễn phí' : formatPrice(order.shipping));
     if (totalEl) totalEl.textContent = formatPrice(order.total);
   }
 

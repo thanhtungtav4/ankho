@@ -64,13 +64,11 @@
       if (p.cat === 'combo') return 1;
       return 2;
     }
+    // Array#sort is stable, so catalog order is kept within each rank.
     var related = others
-      .map(function (p, i) { return { p: p, r: rank(p), i: i }; })
-      .sort(function (a, b) { return a.r - b.r || a.i - b.i; })
-      .slice(0, 4)
-      .map(function (x) { return x.p; });
+      .sort(function (a, b) { return rank(a) - rank(b); })
+      .slice(0, 4);
     grid.innerHTML = related.map(productCardHTML).join('');
-    initAddToCartButtons();
   }
 
   /* Mobile: once the main price/CTA block has scrolled above the viewport,

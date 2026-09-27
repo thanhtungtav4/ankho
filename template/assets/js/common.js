@@ -76,42 +76,31 @@ function addToCart(id, qty, name) {
   showToast('Đã thêm "' + name + '" vào giỏ hàng');
 }
 
-/* Wire up every [data-add-to-cart] button declared in the markup.
-   Safe to call again after rendering new cards: already-wired buttons
-   are skipped, otherwise one click would add the item twice. */
-function initAddToCartButtons() {
-  document.querySelectorAll('[data-add-to-cart]').forEach(function (btn) {
-    if (btn.bpsBound) return;
-    btn.bpsBound = true;
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-product-id');
-      var name = btn.getAttribute('data-product-name') || 'sản phẩm';
-      var qtyInput = document.querySelector('[data-qty-value]');
-      var qty = 1;
-      if (qtyInput && btn.hasAttribute('data-use-qty')) {
-        qty = parseInt(qtyInput.textContent, 10) || 1;
-      }
-      addToCart(id, qty, name);
-    });
-  });
+function buttonQty(btn) {
+  var qtyInput = document.querySelector('[data-qty-value]');
+  if (!qtyInput || !btn.hasAttribute('data-use-qty')) return 1;
+  return parseInt(qtyInput.textContent, 10) || 1;
 }
 
-/* "Mua ngay": add to cart then jump straight to checkout */
-function initBuyNowButtons() {
-  document.querySelectorAll('[data-buy-now]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-product-id');
-      var name = btn.getAttribute('data-product-name') || 'sản phẩm';
-      var qtyInput = document.querySelector('[data-qty-value]');
-      var qty = 1;
-      if (qtyInput && btn.hasAttribute('data-use-qty')) {
-        qty = parseInt(qtyInput.textContent, 10) || 1;
-      }
+/* [data-add-to-cart] and [data-buy-now] ("Mua ngay": add then jump to
+   checkout) are handled by one delegated listener, so buttons in cards
+   rendered later (listing, related products) work without re-binding and
+   a click can never be handled twice. */
+function initCartButtons() {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-add-to-cart], [data-buy-now]');
+    if (!btn) return;
+    var id = btn.getAttribute('data-product-id');
+    var name = btn.getAttribute('data-product-name') || 'sản phẩm';
+    var qty = buttonQty(btn);
+    if (btn.hasAttribute('data-buy-now')) {
       var cart = readCart();
       cart[id] = (cart[id] || 0) + qty;
       writeCart(cart);
       window.location.href = 'checkout.html';
-    });
+      return;
+    }
+    addToCart(id, qty, name);
   });
 }
 
@@ -262,8 +251,7 @@ function setFormMsg(el, text, ok) {
  --------------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', function () {
 updateCartBadges();
-initAddToCartButtons();
-initBuyNowButtons();
+initCartButtons();
 initDrawer();
 initBackToTop();
 initFloatingAutoHide();

@@ -56,25 +56,19 @@
     });
     if (listEl) listEl.innerHTML = rows.join('');
 
-    var subtotalEl = document.querySelector('[data-order-subtotal]');
-    var shippingEl = document.querySelector('[data-order-shipping]');
-    var totalEl = document.querySelector('[data-order-total]');
-    var discountRow = document.querySelector('[data-order-discount-row]');
-    var discountEl = document.querySelector('[data-order-discount]');
-    var couponNoteEl = document.querySelector('[data-coupon-note]');
+    var summaryEls = {
+      subtotal: document.querySelector('[data-order-subtotal]'),
+      shipping: document.querySelector('[data-order-shipping]'),
+      total: document.querySelector('[data-order-total]'),
+      discountRow: document.querySelector('[data-order-discount-row]'),
+      discount: document.querySelector('[data-order-discount]'),
+      couponNote: document.querySelector('[data-coupon-note]')
+    };
     var totals = null;
 
     function renderTotals() {
       totals = computeTotals(subtotal, readCoupon());
-      if (subtotalEl) subtotalEl.textContent = formatPrice(totals.subtotal);
-      if (shippingEl) shippingEl.textContent = totals.shipping === 0 ? 'Miễn phí' : formatPrice(totals.shipping);
-      if (totalEl) totalEl.textContent = formatPrice(totals.total);
-      if (discountRow) discountRow.hidden = !totals.discount;
-      if (discountEl) discountEl.textContent = '−' + formatPrice(totals.discount);
-      if (couponNoteEl) {
-        couponNoteEl.textContent = totals.couponNote;
-        couponNoteEl.hidden = !totals.couponNote;
-      }
+      renderSummaryTotals(summaryEls, totals);
     }
 
     initCouponForm(document.querySelector('[data-coupon]'), renderTotals);
