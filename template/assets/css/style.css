@@ -177,6 +177,13 @@
   --placeholder-1: #efe3d2;
   --placeholder-2: #e7d7c1;
 
+  --leaf: #4f7a3a;
+  --leaf-dark: #3c5f2c;
+  --leaf-bg: #edf3e6;
+  --zalo: #0068ff;
+  --ember: #c2461f;
+  --ember-dark: #9c2f16;
+
   --success: #1f9d55;
   --success-bg: #e6f7ea;
   --success-on-dark: #8ef0a0;
@@ -425,6 +432,23 @@ table {
 
 .topbar__social a {
   color: var(--text-light);
+}
+
+/* On phones the bar was wrapping to 3 rows and pushing price/CTA below
+   the fold: keep only the free-shipping hook (the hotline now lives in
+   the floating call button). */
+@media (max-width: 768px) {
+  .topbar__inner {
+    justify-content: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 12px;
+  }
+
+  .topbar__left .topbar__item:first-child,
+  .topbar__right {
+    display: none;
+  }
 }
 
 .icon-gold {
@@ -1206,13 +1230,48 @@ table {
   position: relative;
 }
 
-.promo-card--1 { background: var(--maroon-dark); }
+/* Each offer gets its own color so the four read as four different deals:
+   ember = urgency (flash sale), gold = savings (combo), brand maroon =
+   Tết gifting, leaf green = free / natural (free shipping). */
+.promo-card--1 {
+  background: linear-gradient(135deg, var(--ember-dark), var(--ember));
+}
 
-.promo-card--2 { background: var(--maroon); }
+.promo-card--1 .promo-card__title { color: #ffe9c2; }
 
-.promo-card--3 { background: var(--maroon-accent); }
+.promo-card--1 .promo-card__sub { color: #fff4e6; }
 
-.promo-card--4 { background: var(--maroon-darker); }
+.promo-card--1 .promo-card__cta {
+  background: #fff;
+  color: var(--ember-dark);
+}
+
+.promo-card--2 {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--brown-dark);
+}
+
+.promo-card--2 .promo-card__title { color: var(--brown-dark); }
+
+.promo-card--2 .promo-card__sub { color: #5a3414; }
+
+.promo-card--2 .promo-card__big { color: var(--maroon); }
+
+.promo-card--2 .promo-card__cta {
+  background: var(--maroon);
+  color: #fff;
+}
+
+.promo-card--3 {
+  background: linear-gradient(135deg, var(--maroon-darker), var(--maroon));
+  box-shadow: inset 0 0 0 1px rgba(231, 184, 92, .45);
+}
+
+.promo-card--4 {
+  background: linear-gradient(135deg, var(--leaf-dark), var(--leaf));
+}
+
+.promo-card--4 .promo-card__sub { color: #fff; }
 
 .promo-card__title {
   font-size: 19px;
@@ -1554,6 +1613,7 @@ table {
 .story-points svg {
   flex-shrink: 0;
   margin-top: 1px;
+  color: var(--leaf);
 }
 
 .story-panel__photo {
@@ -1867,6 +1927,15 @@ table {
   flex-shrink: 0;
 }
 
+.footer-contact a {
+  color: var(--footer-heading);
+  font-weight: 700;
+}
+
+.trust-item a {
+  color: inherit;
+}
+
 .footer-payments {
   display: flex;
   gap: 8px;
@@ -1924,6 +1993,72 @@ table {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+/* Quick contact (Zalo + call): most specialty-food orders in VN close in chat */
+.quick-contact {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform .3s ease;
+}
+
+.quick-contact__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(59, 36, 27, .28);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.quick-contact__btn:active {
+  transform: scale(.94);
+}
+
+.quick-contact__btn--zalo {
+  background: var(--zalo);
+}
+
+.quick-contact__btn--call {
+  background: var(--leaf);
+  animation: bpsRing 2.4s ease-in-out infinite;
+}
+
+.quick-contact__zalo {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+@keyframes bpsRing {
+  0%, 100% { box-shadow: 0 8px 20px rgba(59, 36, 27, .28), 0 0 0 0 rgba(79, 122, 58, .45); }
+  50% { box-shadow: 0 8px 20px rgba(59, 36, 27, .28), 0 0 0 12px rgba(79, 122, 58, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-contact__btn--call { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .quick-contact {
+    left: 14px;
+    bottom: 82px;
+    gap: 10px;
+  }
+
+  .quick-contact__btn {
+    width: 46px;
+    height: 46px;
+  }
 }
 
 /* Toast */
@@ -2307,6 +2442,7 @@ table {
 .detail-highlights svg {
   flex-shrink: 0;
   margin-top: 1px;
+  color: var(--leaf);
 }
 
 .detail-actions {
@@ -2369,6 +2505,124 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* On the product page "Mua ngay" is the highest-intent action, so it gets
+   the solid brand color and "Thêm vào giỏ" steps down to an outline. */
+.detail-actions .btn-buy-now {
+  flex: 1;
+  min-width: 160px;
+  background: var(--maroon);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(139, 30, 45, .28);
+}
+
+.detail-actions .btn-add-cart {
+  flex: 0 1 auto;
+  min-width: 170px;
+  background: #fff;
+  color: var(--maroon);
+  box-shadow: inset 0 0 0 2px var(--maroon);
+}
+
+/* Mobile sticky buy bar (product page) */
+.sticky-buy {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sticky-buy {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    z-index: 85;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg-header);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 18px rgba(59, 36, 27, .12);
+    transform: translateY(calc(100% + 64px));
+    visibility: hidden;
+    transition: transform .3s ease, visibility 0s linear .3s;
+  }
+
+  .sticky-buy.is-visible {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform .3s ease, visibility 0s;
+  }
+
+  .sticky-buy__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sticky-buy__name {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sticky-buy__price {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--maroon);
+  }
+
+  .sticky-buy__old {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted-2);
+    text-decoration: line-through;
+  }
+
+  .sticky-buy__add {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--maroon);
+    box-shadow: inset 0 0 0 2px var(--maroon);
+    background: #fff;
+  }
+
+  .sticky-buy__now {
+    height: 46px;
+    padding: 0 22px;
+    border-radius: 12px;
+    background: var(--maroon);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .sticky-buy__add:active,
+  .sticky-buy__now:active {
+    transform: scale(.96);
+  }
+
+  body.has-sticky-buy .quick-contact {
+    transform: translateY(-66px);
+  }
+
+  body.has-sticky-buy .back-top {
+    bottom: 148px;
+  }
+
+  body.has-sticky-buy .toast-wrap--above-nav {
+    bottom: 148px;
+  }
 }
 
 .detail-promises {
@@ -3463,6 +3717,165 @@ table {
   margin: 8px 0 16px;
 }
 
+.cart-summary__row--discount span:last-child {
+  color: var(--leaf);
+  font-weight: 700;
+}
+
+/* Free-shipping progress nudge */
+.freeship {
+  background: var(--leaf-bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.freeship__text {
+  font-size: 13px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.freeship__text strong {
+  color: var(--leaf-dark);
+}
+
+.freeship__track {
+  height: 8px;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.freeship__bar {
+  display: block;
+  height: 100%;
+  width: var(--freeship-progress, 0%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gold), var(--leaf));
+  transition: width .4s ease;
+}
+
+.freeship.is-done .freeship__bar {
+  background: var(--leaf);
+}
+
+/* Discount code box */
+.coupon {
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+}
+
+.coupon__form {
+  display: flex;
+  gap: 8px;
+}
+
+.coupon__input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--text-main);
+}
+
+.coupon__input::placeholder {
+  text-transform: none;
+  color: var(--text-muted-2);
+}
+
+.coupon__input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: var(--gold);
+}
+
+.coupon__btn {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  background: var(--text-main);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.coupon__applied {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--leaf-bg);
+  color: var(--leaf-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.coupon__applied svg {
+  flex-shrink: 0;
+}
+
+.coupon__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.coupon__remove {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--maroon);
+  text-decoration: underline;
+  padding: 6px 2px;
+  flex-shrink: 0;
+}
+
+.coupon__msg {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.coupon__msg:empty {
+  display: none;
+}
+
+.coupon__msg.is-ok {
+  color: var(--leaf-dark);
+}
+
+.coupon__msg.is-error,
+.coupon__note {
+  color: var(--error);
+}
+
+.coupon__note {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.coupon__hint {
+  font-size: 12px;
+  color: var(--text-muted-2);
+  margin-top: 8px;
+}
+
+.coupon__applied:not([hidden]) ~ .coupon__hint {
+  display: none;
+}
+
+.coupon__hint strong {
+  color: var(--maroon);
+  letter-spacing: .3px;
+}
+
 .cart-summary__checkout {
   display: flex;
   align-items: center;
@@ -3796,6 +4209,14 @@ table {
     background: var(--gold-hover);
   }
 
+  .promo-card--1 .promo-card__cta:hover {
+    background: #ffe9c2;
+  }
+
+  .promo-card--2 .promo-card__cta:hover {
+    background: var(--maroon-dark);
+  }
+
   .featured-card:hover {
     color: var(--maroon);
   }
@@ -3857,6 +4278,14 @@ table {
 
   .btn-buy-now:hover {
     background: var(--gold-hover);
+  }
+
+  .detail-actions .btn-buy-now:hover {
+    background: var(--maroon-dark);
+  }
+
+  .detail-actions .btn-add-cart:hover {
+    background: var(--bg-soft);
   }
 
   .btn-solid-cta:hover {
@@ -4158,7 +4587,7 @@ table {
 .story-section__list svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--gold);
+  color: var(--leaf);
 }
 
 /* Pull quote */
@@ -4529,8 +4958,8 @@ table {
 }
 
 .story-compare__col--good {
-  border-color: var(--success);
-  background: var(--success-bg);
+  border-color: var(--leaf);
+  background: var(--leaf-bg);
 }
 
 .story-compare__col--bad {
@@ -4548,7 +4977,7 @@ table {
 }
 
 .story-compare__col--good .story-compare__heading {
-  color: var(--success);
+  color: var(--leaf-dark);
 }
 
 .story-compare__col--bad .story-compare__heading {
@@ -4576,7 +5005,7 @@ table {
 }
 
 .story-compare__col--good svg {
-  color: var(--success);
+  color: var(--leaf);
 }
 
 .story-compare__col--bad svg {

@@ -15,7 +15,7 @@
       '<div class="cart-line" data-cart-line data-id="' + id + '">' +
         '<span class="cart-line__img" role="img" aria-label="' + name + '">ảnh: ' + img + '</span>' +
         '<div class="cart-line__info">' +
-          '<a href="product-detail.html" class="cart-line__name">' + name + '</a>' +
+          '<a href="product-detail.html?id=' + id + '" class="cart-line__name">' + name + '</a>' +
           '<span class="cart-line__price">' + formatPrice(product.price) + ' / sản phẩm</span>' +
         '</div>' +
         '<div class="qty-stepper cart-line__qty">' +
@@ -39,6 +39,27 @@
     var totalEl = document.querySelector('[data-cart-total]');
     var summaryEl = document.querySelector('[data-cart-summary]');
     var layoutEl = document.querySelector('.cart-layout');
+    var discountRow = document.querySelector('[data-cart-discount-row]');
+    var discountEl = document.querySelector('[data-cart-discount]');
+    var couponNoteEl = document.querySelector('[data-coupon-note]');
+    var freeshipEl = document.querySelector('[data-freeship]');
+    var freeshipText = document.querySelector('[data-freeship-text]');
+    var freeshipBar = document.querySelector('[data-freeship-bar]');
+
+    /* "Buy X more for free shipping" nudge: the single most effective lever
+       for raising average order value on a free-shipping threshold. */
+    function renderFreeship(subtotal) {
+      if (!freeshipEl) return;
+      var remaining = FREE_SHIPPING_THRESHOLD - subtotal;
+      var pct = Math.min(100, Math.round(subtotal / FREE_SHIPPING_THRESHOLD * 100));
+      freeshipEl.classList.toggle('is-done', remaining <= 0);
+      if (freeshipBar) freeshipBar.style.setProperty('--freeship-progress', pct + '%');
+      if (freeshipText) {
+        freeshipText.innerHTML = remaining > 0
+          ? 'Mua thêm <strong>' + formatPrice(remaining) + '</strong> để được <strong>miễn phí vận chuyển</strong>'
+          : '<strong>Tuyệt vời!</strong> Đơn hàng của bạn được miễn phí vận chuyển';
+      }
+    }
 
     function changeQty(id, delta) {
       var cart = readCart();
@@ -83,10 +104,17 @@
         return cartLineHTML(product, cart[id]);
       }).join('');
 
-      var shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
-      if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
-      if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Miễn phí' : formatPrice(shipping);
-      if (totalEl) totalEl.textContent = formatPrice(subtotal + shipping);
+      var totals = computeTotals(subtotal, readCoupon());
+      if (subtotalEl) subtotalEl.textContent = formatPrice(totals.subtotal);
+      if (shippingEl) shippingEl.textContent = totals.shipping === 0 ? 'Miễn phí' : formatPrice(totals.shipping);
+      if (totalEl) totalEl.textContent = formatPrice(totals.total);
+      if (discountRow) discountRow.hidden = !totals.discount;
+      if (discountEl) discountEl.textContent = '−' + formatPrice(totals.discount);
+      if (couponNoteEl) {
+        couponNoteEl.textContent = totals.couponNote;
+        couponNoteEl.hidden = !totals.couponNote;
+      }
+      renderFreeship(subtotal);
 
       container.querySelectorAll('[data-cart-line]').forEach(function (line) {
         var id = line.getAttribute('data-id');
@@ -101,6 +129,7 @@
       updateCartBadges();
     }
 
+    initCouponForm(document.querySelector('[data-coupon]'), render);
     render();
   }
 

@@ -56,14 +56,29 @@
     });
     if (listEl) listEl.innerHTML = rows.join('');
 
-    var shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
-    var total = subtotal + shipping;
     var subtotalEl = document.querySelector('[data-order-subtotal]');
     var shippingEl = document.querySelector('[data-order-shipping]');
     var totalEl = document.querySelector('[data-order-total]');
-    if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
-    if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Miễn phí' : formatPrice(shipping);
-    if (totalEl) totalEl.textContent = formatPrice(total);
+    var discountRow = document.querySelector('[data-order-discount-row]');
+    var discountEl = document.querySelector('[data-order-discount]');
+    var couponNoteEl = document.querySelector('[data-coupon-note]');
+    var totals = null;
+
+    function renderTotals() {
+      totals = computeTotals(subtotal, readCoupon());
+      if (subtotalEl) subtotalEl.textContent = formatPrice(totals.subtotal);
+      if (shippingEl) shippingEl.textContent = totals.shipping === 0 ? 'Miễn phí' : formatPrice(totals.shipping);
+      if (totalEl) totalEl.textContent = formatPrice(totals.total);
+      if (discountRow) discountRow.hidden = !totals.discount;
+      if (discountEl) discountEl.textContent = '−' + formatPrice(totals.discount);
+      if (couponNoteEl) {
+        couponNoteEl.textContent = totals.couponNote;
+        couponNoteEl.hidden = !totals.couponNote;
+      }
+    }
+
+    initCouponForm(document.querySelector('[data-coupon]'), renderTotals);
+    renderTotals();
 
     initPaymentMethodSync(form);
 
@@ -91,9 +106,11 @@
       var order = {
         id: 'DH' + Date.now(),
         items: items,
-        subtotal: subtotal,
-        shipping: shipping,
-        total: total,
+        subtotal: totals.subtotal,
+        discount: totals.discount,
+        coupon: totals.coupon,
+        shipping: totals.shipping,
+        total: totals.total,
         customer: {
           name: name, phone: phone, address: address,
           email: emailField ? emailField.value.trim() : '',
@@ -111,6 +128,7 @@
       } catch (err) { /* storage unavailable */ }
 
       writeCart({});
+      writeCoupon('');
       window.location.href = 'order-success.html';
     });
   }

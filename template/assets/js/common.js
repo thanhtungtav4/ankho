@@ -76,9 +76,13 @@ function addToCart(id, qty, name) {
   showToast('Đã thêm "' + name + '" vào giỏ hàng');
 }
 
-/* Wire up every [data-add-to-cart] button declared in the markup */
+/* Wire up every [data-add-to-cart] button declared in the markup.
+   Safe to call again after rendering new cards: already-wired buttons
+   are skipped, otherwise one click would add the item twice. */
 function initAddToCartButtons() {
   document.querySelectorAll('[data-add-to-cart]').forEach(function (btn) {
+    if (btn.bpsBound) return;
+    btn.bpsBound = true;
     btn.addEventListener('click', function () {
       var id = btn.getAttribute('data-product-id');
       var name = btn.getAttribute('data-product-name') || 'sản phẩm';
