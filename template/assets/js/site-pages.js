@@ -146,7 +146,78 @@
     });
   }
 
+  /* ---------------------------------------------------------------------
+     B2B gift page: quote request (stored locally until the backend exists)
+     --------------------------------------------------------------------- */
+  function initB2BForm() {
+    var form = document.querySelector('[data-b2b-form]');
+    if (!form) return;
+    var msgEl = form.querySelector('[data-form-msg]');
+    var dateInput = form.querySelector('[data-field-date]');
+    function value(sel) {
+      var el = form.querySelector(sel);
+      return el ? el.value.trim() : '';
+    }
+    function today() {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    if (dateInput) dateInput.min = today();
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = value('[data-field-name]');
+      var phone = value('[data-field-phone]');
+      var email = value('[data-field-email]');
+      var qty = value('[data-field-qty]');
+      var date = value('[data-field-date]');
+
+      if (!name || !phone) {
+        setFormMsg(msgEl, 'Vui lòng nhập người liên hệ và số điện thoại.', false);
+        return;
+      }
+      if (!/^[0-9+ ]{9,15}$/.test(phone)) {
+        setFormMsg(msgEl, 'Số điện thoại không hợp lệ.', false);
+        return;
+      }
+      if (email && !isValidEmail(email)) {
+        setFormMsg(msgEl, 'Email không hợp lệ.', false);
+        return;
+      }
+      if (!qty) {
+        setFormMsg(msgEl, 'Vui lòng chọn số lượng hộp dự kiến.', false);
+        return;
+      }
+      if (date && date < today()) {
+        setFormMsg(msgEl, 'Ngày cần giao phải từ hôm nay trở đi.', false);
+        return;
+      }
+
+      var request = {
+        id: 'BG' + Date.now(),
+        name: name,
+        phone: phone,
+        company: value('[data-field-company]'),
+        email: email,
+        qty: qty,
+        date: date,
+        needs: Array.prototype.map.call(form.querySelectorAll('input[name="needs"]:checked'), function (c) { return c.value; }),
+        note: value('[data-field-note]'),
+        createdAt: new Date().toISOString()
+      };
+      try {
+        var list = JSON.parse(localStorage.getItem('bps_b2b_requests') || '[]');
+        list.push(request);
+        localStorage.setItem('bps_b2b_requests', JSON.stringify(list));
+      } catch (err) { /* storage unavailable: the message below still guides the customer */ }
+
+      setFormMsg(msgEl, 'Cảm ơn ' + name + '! Bếp Phù Sa đã nhận yêu cầu và sẽ gọi lại số ' + phone + ' trong vòng 24 giờ (8h–21h).', true);
+      form.reset();
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initB2BForm();
     initContactForm();
     initNewsFilter();
     initPolicyNav();

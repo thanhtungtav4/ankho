@@ -63,6 +63,11 @@
     document.title = p.name + ' — Bếp Phù Sa';
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', copy.desc[0].replace('{name}', p.name));
+    // Only crawlers that run JS see these; Zalo/Facebook keep the static default.
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogTitle) ogTitle.setAttribute('content', document.title);
+    if (ogDesc && metaDesc) ogDesc.setAttribute('content', metaDesc.getAttribute('content'));
 
     var catLink = document.querySelector('[data-pd-cat-link]');
     if (catLink) { catLink.textContent = p.catLabel; catLink.setAttribute('href', 'products.html?cat=' + p.cat); }
