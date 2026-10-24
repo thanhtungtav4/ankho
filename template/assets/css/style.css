@@ -892,6 +892,22 @@ table {
   transition: transform .2s, background .2s;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+}
+
+/* Secondary hero action: the brand story sits one tap from the headline */
+.hero__story-link {
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(231, 184, 92, .5);
+}
+
 .hero__usps {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -4621,6 +4637,11 @@ table {
     background: var(--maroon-dark);
   }
 
+  .hero__story-link:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+
   .promo-card__cta:hover {
     background: var(--gold-hover);
   }
@@ -5349,6 +5370,29 @@ table {
   color: var(--text-light);
   display: block;
   margin-bottom: 6px;
+}
+
+.story-related__lead {
+  max-width: 560px;
+  margin: -12px auto 24px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .story-related--home {
+    padding: 44px 24px;
+  }
+
+  .story-related--home .story-related__grid {
+    gap: 12px;
+  }
+
+  .story-related--home .story-related-card {
+    min-height: 116px;
+    padding: 18px;
+  }
 }
 
 .story-related-card__title {
