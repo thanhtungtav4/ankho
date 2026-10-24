@@ -30,20 +30,24 @@
     var items = document.querySelectorAll('.story-faq-item');
     if (!items.length) return;
 
+    /* Collapsed answers are only visually clipped (max-height animation),
+       so they are also hidden from screen readers until opened. */
+    function setOpen(item, open) {
+      item.classList.toggle('is-open', open);
+      var q = item.querySelector('.story-faq-item__q');
+      var a = item.querySelector('.story-faq-item__a');
+      if (q) q.setAttribute('aria-expanded', String(open));
+      if (a) a.setAttribute('aria-hidden', String(!open));
+    }
+
     items.forEach(function (item) {
+      setOpen(item, item.classList.contains('is-open'));
       var btn = item.querySelector('.story-faq-item__q');
       if (!btn) return;
       btn.addEventListener('click', function () {
         var wasOpen = item.classList.contains('is-open');
-        items.forEach(function (other) {
-          other.classList.remove('is-open');
-          var otherBtn = other.querySelector('.story-faq-item__q');
-          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) {
-          item.classList.add('is-open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
+        items.forEach(function (other) { setOpen(other, false); });
+        if (!wasOpen) setOpen(item, true);
       });
     });
   }

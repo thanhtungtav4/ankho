@@ -718,14 +718,19 @@ table {
   width: min(310px, 84vw);
   background: var(--bg-header);
   box-shadow: 6px 0 30px rgba(0, 0, 0, .2);
-  transition: transform .32s ease;
   display: flex;
   flex-direction: column;
   transform: translateX(-102%);
+  /* hidden (not just off-screen) while closed so its links drop out of the
+     Tab order; visibility flips only after the slide-out finishes */
+  visibility: hidden;
+  transition: transform .32s ease, visibility 0s linear .32s;
 }
 
 .drawer.is-open {
   transform: translateX(0);
+  visibility: visible;
+  transition: transform .32s ease, visibility 0s;
 }
 
 .drawer__head {
@@ -2017,6 +2022,10 @@ table {
   overflow: hidden;
 }
 
+.newsletter__form:focus-within {
+  box-shadow: 0 0 0 3px var(--gold);
+}
+
 .newsletter__input {
   flex: 1;
   border: none;
@@ -2243,16 +2252,19 @@ table {
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 20px rgba(59, 36, 27, .3);
-  transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, visibility 0s linear .3s;
   opacity: 0;
+  visibility: hidden; /* out of the Tab order while invisible */
   pointer-events: none;
   transform: translateY(10px);
 }
 
 .back-top.is-visible {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
+  transition: opacity .3s, transform .3s, visibility 0s;
 }
 
 /* Quick contact (Zalo + call): most specialty-food orders in VN close in chat */
@@ -3473,6 +3485,7 @@ table {
 .form-textarea:focus {
   border-color: var(--gold);
   outline: none;
+  box-shadow: 0 0 0 2px var(--gold);
 }
 
 .form-textarea {

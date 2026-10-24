@@ -23,6 +23,11 @@ function escapeHtml(value) {
   return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) { return ESCAPE_MAP[c]; });
 }
 
+/* Shared by every form that asks for an email (newsletter, contact, auth). */
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 /* ---------------------------------------------------------------------
    Cart (persisted in localStorage, shared across every page)
    --------------------------------------------------------------------- */
@@ -113,19 +118,31 @@ function initDrawer() {
   var openers = document.querySelectorAll('[data-drawer-open]');
   var closers = document.querySelectorAll('[data-drawer-close]');
   if (!drawer || !overlay) return;
+  var lastFocus = null;
+
+  function setExpanded(value) {
+    openers.forEach(function (btn) { btn.setAttribute('aria-expanded', String(value)); });
+  }
 
   function open() {
+    lastFocus = document.activeElement;
     drawer.classList.add('is-open');
     overlay.classList.add('is-open');
     drawer.setAttribute('aria-hidden', 'false');
+    setExpanded(true);
     document.body.style.overflow = 'hidden';
+    var first = drawer.querySelector('[data-drawer-close], a, button');
+    if (first) first.focus();
   }
 
   function close() {
+    if (!drawer.classList.contains('is-open')) return;
     drawer.classList.remove('is-open');
     overlay.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
+    setExpanded(false);
     document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
   openers.forEach(function (btn) { btn.addEventListener('click', open); });
@@ -209,17 +226,11 @@ function initNewsletterForms() {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var val = input ? input.value.trim() : '';
-      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      if (!msg) return;
-      if (!ok) {
-        msg.textContent = 'Vui lòng nhập email hợp lệ.';
-        msg.classList.remove('is-ok');
-        msg.classList.add('is-error');
+      if (!isValidEmail(val)) {
+        setFormMsg(msg, 'Vui lòng nhập email hợp lệ.', false);
         return;
       }
-      msg.textContent = 'Cảm ơn bạn! Đăng ký nhận tin thành công.';
-      msg.classList.remove('is-error');
-      msg.classList.add('is-ok');
+      setFormMsg(msg, 'Cảm ơn bạn! Đăng ký nhận tin thành công.', true);
       if (input) input.value = '';
     });
   });

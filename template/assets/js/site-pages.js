@@ -21,22 +21,15 @@
       var email = emailInput ? emailInput.value.trim() : '';
       var message = msgInput ? msgInput.value.trim() : '';
 
-      if (!msgEl) return;
       if (!name || !message) {
-        msgEl.textContent = 'Vui lòng nhập họ tên và nội dung.';
-        msgEl.classList.remove('is-ok');
-        msgEl.classList.add('is-error');
+        setFormMsg(msgEl, 'Vui lòng nhập họ tên và nội dung.', false);
         return;
       }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        msgEl.textContent = 'Vui lòng nhập email hợp lệ.';
-        msgEl.classList.remove('is-ok');
-        msgEl.classList.add('is-error');
+      if (!isValidEmail(email)) {
+        setFormMsg(msgEl, 'Vui lòng nhập email hợp lệ.', false);
         return;
       }
-      msgEl.textContent = 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm.';
-      msgEl.classList.remove('is-error');
-      msgEl.classList.add('is-ok');
+      setFormMsg(msgEl, 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm.', true);
       form.reset();
     });
   }
@@ -77,19 +70,37 @@
     if (!buttons.length) return;
     var panels = document.querySelectorAll('[data-policy-panel]');
 
+    function show(key) {
+      buttons.forEach(function (b) {
+        var active = b.getAttribute('data-policy-nav-btn') === key;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-current', String(active));
+      });
+      panels.forEach(function (panel) {
+        panel.classList.toggle('is-active', panel.getAttribute('data-policy-panel') === key);
+      });
+    }
+
+    function hasPanel(key) {
+      return Array.prototype.some.call(panels, function (p) { return p.getAttribute('data-policy-panel') === key; });
+    }
+
     buttons.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var key = btn.getAttribute('data-policy-nav-btn');
-        buttons.forEach(function (b) {
-          var active = b === btn;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-current', String(active));
-        });
-        panels.forEach(function (panel) {
-          panel.classList.toggle('is-active', panel.getAttribute('data-policy-panel') === key);
-        });
+        show(key);
+        /* keep the URL in sync so the open policy can be linked/shared */
+        if (window.history && history.replaceState) history.replaceState(null, '', '#' + key);
       });
     });
+
+    /* Footer links deep-link to a policy (policy.html#baomat, #faq, ...). */
+    function fromHash() {
+      var key = window.location.hash.slice(1);
+      if (key && hasPanel(key)) show(key);
+    }
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
   }
 
   /* ---------------------------------------------------------------------
@@ -112,7 +123,7 @@
           return;
         }
         var emailVal = emailField ? emailField.value.trim() : '';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        if (!isValidEmail(emailVal)) {
           setFormMsg(msgEl, 'Vui lòng nhập email hợp lệ.', false);
           return;
         }
