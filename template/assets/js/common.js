@@ -230,7 +230,7 @@ function initNewsletterForms() {
         setFormMsg(msg, 'Vui lòng nhập email hợp lệ.', false);
         return;
       }
-      setFormMsg(msg, 'Cảm ơn bạn! Đăng ký nhận tin thành công.', true);
+      setFormMsg(msg, 'Đăng ký thành công! Mã giảm 10% của bạn: PHUSA10 (nhập ở giỏ hàng).', true);
       if (input) input.value = '';
     });
   });
