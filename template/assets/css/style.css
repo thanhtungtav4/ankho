@@ -4155,6 +4155,162 @@ table {
   border-radius: 11px;
 }
 
+/* Product mentioned in an article: lets the reader buy without leaving */
+.article-product {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+  padding: 22px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.article-product__img {
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: #8a755f;
+  background: repeating-linear-gradient(135deg, var(--placeholder-1), var(--placeholder-1) 12px, var(--placeholder-2) 12px, var(--placeholder-2) 24px);
+}
+
+.article-product__kicker {
+  display: inline-block;
+  background: var(--leaf-bg);
+  color: var(--leaf-dark);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.article-product__name {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.article-product__name a {
+  color: var(--text-main);
+}
+
+.article-product__rating {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.article-product__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.article-product__list li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.article-product__list svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--leaf);
+}
+
+.article-product__price-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+
+.article-product__save {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ember-dark);
+}
+
+.article-product__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.article-product__actions .btn-add-cart {
+  min-width: 0;
+  flex: 1 1 180px;
+}
+
+.article-product__actions .btn-buy-now {
+  flex: 1 1 120px;
+}
+
+.article-product__note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sidebar-offer {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px dashed var(--gold);
+  border-radius: var(--radius-md);
+  background: #fffaf0;
+}
+
+.sidebar-offer__kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ember-dark);
+}
+
+.sidebar-offer__title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--maroon);
+  margin: 4px 0 6px;
+}
+
+.sidebar-offer__text {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.sidebar-offer__code {
+  color: var(--maroon);
+  letter-spacing: .04em;
+}
+
+@media (max-width: 600px) {
+  .article-product {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 18px;
+  }
+
+  .article-product__img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 /* ==========================================================================
    Policy page
    ========================================================================== */
@@ -4969,6 +5125,40 @@ table {
   color: var(--text-muted);
 }
 
+.auth-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: -8px 0 22px;
+  padding: 14px 16px;
+  background: var(--leaf-bg);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.auth-perks li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.auth-perks svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--leaf);
+}
+
+.auth-guest {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    Hover-only affordances
    Guarded so touch devices never get a hover style stuck "on" after a tap
@@ -5655,6 +5845,62 @@ table {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.story-buy-card__name a {
+  color: inherit;
+}
+
+/* Founder story: three picks side by side instead of one centered card */
+.founder-picks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.founder-picks .story-buy-card {
+  max-width: none;
+  margin: 0;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.founder-picks .story-buy-card__badge {
+  align-self: center;
+}
+
+.founder-picks .story-buy-card__actions {
+  margin-top: auto;
+}
+
+.founder-picks .btn-add-cart {
+  min-width: 0;
+}
+
+.founder-picks__note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 860px) {
+  .founder-picks {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -24px;
+    padding: 0 24px 6px;
+    scroll-padding-left: 24px;
+  }
+
+  .founder-picks .story-buy-card {
+    flex: 0 0 min(78%, 300px);
+    scroll-snap-align: start;
+  }
 }
 
 .story-buy-card__note {
