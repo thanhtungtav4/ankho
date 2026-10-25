@@ -3079,6 +3079,73 @@ table {
   }
 }
 
+/* Buy boosters under the PDP buttons: freeship-by-quantity, first-order
+   code, Zalo consult */
+.buy-boost {
+  margin-top: 16px;
+  border: 1px dashed var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* plain text flow (not flex) so inline <strong> keeps normal word spacing */
+.buy-boost__row {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.buy-boost__row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.buy-boost__row--ship::before {
+  background: var(--leaf);
+}
+
+.buy-boost__row--ship strong {
+  color: var(--leaf-dark);
+}
+
+.buy-boost__row--coupon::before {
+  background: var(--gold);
+}
+
+.buy-boost__row--coupon strong {
+  color: var(--maroon);
+  letter-spacing: .3px;
+}
+
+.buy-boost__zalo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--zalo);
+  min-height: 32px;
+}
+
+.buy-boost__zalo-badge {
+  background: var(--zalo);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+
 .detail-promises {
   display: flex;
   flex-wrap: wrap;
@@ -3196,15 +3263,42 @@ table {
   color: var(--text-main);
 }
 
-/* Responsive helpers */
+/* Responsive helpers: on phones the quantity and "Thêm vào giỏ" share a
+   row and "Mua ngay" takes the full width below, instead of three
+   stacked rows with a half-empty quantity bar. */
 @media (max-width: 620px) {
   .detail-actions {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 10px;
   }
 
-  .btn-buy-now {
-    width: 100%;
+  .detail-actions .qty-stepper {
+    flex: 0 0 auto;
+  }
+
+  .detail-actions .btn-add-cart {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 8px;
+  }
+
+  .detail-actions .btn-buy-now {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .detail-actions .qty-stepper button {
+    width: 36px;
+  }
+
+  .detail-actions .qty-stepper__value {
+    width: 36px;
+  }
+
+  .detail-actions .btn-add-cart svg {
+    display: none;
   }
 }
 
@@ -3539,6 +3633,35 @@ table {
   padding: 15px;
   border-radius: var(--radius-sm);
   min-height: 48px;
+}
+
+/* reassurance right under "Đặt hàng" */
+.checkout-assure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--leaf-bg);
+}
+
+.checkout-assure li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.checkout-assure li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--leaf);
+  border-bottom: 2px solid var(--leaf);
+  transform: rotate(-45deg);
 }
 
 .form-msg {
@@ -4158,7 +4281,49 @@ table {
    where the summary sidebar used to be. Collapse to one column instead. */
 .cart-layout:has(.cart-summary[hidden]),
 .cart-layout.is-empty {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cart-main {
+  min-width: 0;
+}
+
+/* "Thêm một món để được freeship" suggestions under the cart lines */
+.cart-upsell {
+  margin-top: 28px;
+}
+
+.cart-upsell__title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--maroon);
+  margin-bottom: 14px;
+}
+
+.cart-upsell__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .cart-upsell__grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -24px;
+    padding: 0 24px 4px;
+    scroll-padding-left: 24px;
+    scrollbar-width: none;
+  }
+
+  .cart-upsell__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cart-upsell__grid .product-card {
+    flex: 0 0 46%;
+    scroll-snap-align: start;
+  }
 }
 
 .cart-items {
@@ -4505,8 +4670,10 @@ table {
 }
 
 @media (max-width: 780px) {
+  /* minmax(0, ...) not 1fr: a plain 1fr track grows to its widest child
+     (cart line, upsell row) and pushed the page wider than the phone */
   .cart-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .cart-line {
@@ -4521,6 +4688,14 @@ table {
   .cart-line__total { grid-area: total; }
   .cart-line__remove { position: absolute; top: 10px; right: 10px; }
   .cart-line { position: relative; }
+  .cart-line__info { padding-right: 34px; } /* keep the name clear of the remove button */
+
+  /* phones: lines -> summary with the checkout button -> upsell, so the
+     button isn't pushed below the suggestions */
+  .cart-main { display: contents; }
+  .cart-items { order: 1; }
+  .cart-summary { order: 2; position: static; }
+  .cart-upsell { order: 3; margin-top: 0; }
 }
 
 /* ==========================================================================
@@ -4642,7 +4817,14 @@ table {
 
 @media (max-width: 780px) {
   .checkout-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .checkout-form-card,
+  .order-summary-card {
+    padding: 18px;
   }
 }
 
@@ -4693,6 +4875,52 @@ table {
   padding: 8px 18px;
   border-radius: 20px;
   margin-bottom: 24px;
+}
+
+/* what happens after ordering */
+.success-steps {
+  list-style: none;
+  counter-reset: step;
+  text-align: left;
+  margin: 24px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.success-steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 40px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.success-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--maroon);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-steps strong {
+  display: block;
+  color: var(--text-main);
+}
+
+.success-help {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 22px;
 }
 
 .success-box__actions {

@@ -39,6 +39,8 @@ function readCart() {
 
 function writeCart(cart) {
   try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* storage unavailable */ }
+  // lets page widgets (free-shipping nudges, upsells) react to any cart change
+  document.dispatchEvent(new CustomEvent('bps:cartchange'));
 }
 
 function cartCount(cart) {

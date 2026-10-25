@@ -125,7 +125,13 @@
 
   <div class="content-section">
     <div class="cart-layout">
-      <section aria-label="Sản phẩm trong giỏ" class="cart-items" data-cart-items></section>
+      <div class="cart-main">
+        <section aria-label="Sản phẩm trong giỏ" class="cart-items" data-cart-items></section>
+        <section aria-labelledby="cartUpsellTitle" class="cart-upsell" data-cart-upsell hidden>
+          <h2 id="cartUpsellTitle" class="cart-upsell__title" data-cart-upsell-title>Thêm một món để được miễn phí vận chuyển</h2>
+          <div class="product-grid cart-upsell__grid" data-cart-upsell-grid></div>
+        </section>
+      </div>
 
       <aside class="cart-summary" data-cart-summary>
         <h2 class="cart-summary__title">Tóm tắt đơn hàng</h2>

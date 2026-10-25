@@ -47,6 +47,34 @@
     var freeshipEl = document.querySelector('[data-freeship]');
     var freeshipText = document.querySelector('[data-freeship-text]');
     var freeshipBar = document.querySelector('[data-freeship-bar]');
+    var upsellEl = document.querySelector('[data-cart-upsell]');
+    var upsellTitle = document.querySelector('[data-cart-upsell-title]');
+    var upsellGrid = document.querySelector('[data-cart-upsell-grid]');
+
+    /* Suggest up to 3 products not in the cart. Below the free-shipping
+       threshold, the ones that alone close the gap come first (cheapest
+       first), so one tap gets the shopper free shipping. */
+    function renderUpsell(cart, totals) {
+      if (!upsellEl || !upsellGrid) return;
+      var remaining = totals.shipping === 0 ? 0 : FREE_SHIPPING_THRESHOLD - totals.subtotal;
+      var pool = PRODUCTS.filter(function (p) { return !cart[p.id]; });
+      var picks;
+      if (remaining > 0) {
+        var closers = pool.filter(function (p) { return p.price >= remaining; })
+          .sort(function (a, b) { return a.price - b.price; });
+        var rest = pool.filter(function (p) { return p.price < remaining; })
+          .sort(function (a, b) { return b.sold - a.sold; });
+        picks = closers.concat(rest).slice(0, 3);
+        if (upsellTitle) upsellTitle.textContent = closers.length
+          ? 'Thêm một món để được miễn phí vận chuyển'
+          : 'Mua thêm ' + formatPrice(remaining) + ' để được miễn phí vận chuyển';
+      } else {
+        picks = pool.sort(function (a, b) { return b.sold - a.sold; }).slice(0, 3);
+        if (upsellTitle) upsellTitle.textContent = 'Khách thường mua kèm';
+      }
+      upsellEl.hidden = !picks.length;
+      upsellGrid.innerHTML = picks.map(productCardHTML).join('');
+    }
 
     /* "Buy X more for free shipping" nudge: the single most effective lever
        for raising average order value on a free-shipping threshold. */
@@ -92,6 +120,7 @@
             '<a href="products.html" class="btn-solid-cta cart-empty__cta">Tiếp tục mua sắm</a>' +
           '</div>';
         if (summaryEl) summaryEl.hidden = true;
+        if (upsellEl) upsellEl.hidden = true;
         if (layoutEl) layoutEl.classList.add('is-empty');
         updateCartBadges();
         return;
@@ -110,6 +139,7 @@
       var totals = computeTotals(subtotal, readCoupon());
       renderSummaryTotals(summaryEls, totals);
       renderFreeship(totals);
+      renderUpsell(cart, totals);
 
       container.querySelectorAll('[data-cart-line]').forEach(function (line) {
         var id = line.getAttribute('data-id');
@@ -125,6 +155,8 @@
     }
 
     initCouponForm(document.querySelector('[data-coupon]'), render);
+    // adding a suggested product (delegated add-to-cart) re-renders the cart
+    document.addEventListener('bps:cartchange', render);
     render();
   }
 

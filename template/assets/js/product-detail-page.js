@@ -40,6 +40,76 @@
     }
   };
 
+  /* Per-product copy (sales draft: weights, ingredients and shelf life are
+     to be confirmed against the real labels before launch). */
+  var PRODUCT_COPY = {
+    'mam-ca-linh': {
+      highlights: ['Cá linh non mùa nước nổi, ủ chín rồi chưng cùng sả ớt', 'Chưng sẵn, mở hũ là ăn, không cần nấu', 'Không chất bảo quản, không phẩm màu', 'Hũ đóng kín, tem nhãn xuất xứ đầy đủ'],
+      desc: ['Cá linh là "lộc nước nổi" của miền Tây, mỗi năm chỉ nhiều vào mùa nước nổi tháng 8–11. Bếp Phù Sa ủ cá linh non theo công thức của má, rồi chưng cùng sả, ớt, tỏi phi cho dậy mùi.', 'Mắm đã chưng sẵn nên mở hũ là ăn được: ăn với cơm nóng, cuốn rau sống, chấm thịt luộc. Vị mặn ngọt vừa phải, không gắt, ăn hoài không ngán.'],
+      spec: [['Quy cách', 'Hũ 500g'], ['Thành phần', 'Cá linh, muối, đường thốt nốt, sả, ớt, tỏi'], ['Bảo quản', 'Ngăn mát tủ lạnh, dùng trong 2 tháng sau khi mở'], ['Cách dùng', 'Ăn với cơm nóng, rau sống, thịt luộc']]
+    },
+    'mam-thai': {
+      highlights: ['Mắm cá lóc trộn đu đủ bào và thính gạo rang', 'Vị chua ngọt hài hòa, ăn không ngán', 'Ăn liền, không cần chế biến', 'Không chất bảo quản, không phẩm màu'],
+      desc: ['Mắm thái làm theo kiểu Châu Đốc: thịt cá lóc ủ mắm được xắt sợi, trộn đu đủ bào, thính gạo rang, tỏi ớt và chút đường thốt nốt cho vị chua ngọt tròn miệng.', 'Ngon nhất khi ăn kèm thịt ba chỉ luộc, bún tươi và rau sống, hoặc đơn giản là một chén cơm nóng.'],
+      spec: [['Quy cách', 'Hũ 500g'], ['Thành phần', 'Mắm cá lóc, đu đủ, thính gạo, tỏi, ớt, đường thốt nốt'], ['Bảo quản', 'Ngăn mát tủ lạnh, dùng trong 1 tháng sau khi mở'], ['Cách dùng', 'Ăn với thịt luộc, bún, rau sống']]
+    },
+    'mam-ca-sac': {
+      highlights: ['Cá sặc ủ nguyên con, thịt chắc, thơm đậm', 'Hợp chưng thịt, kho quẹt, nấu lẩu mắm', 'Không chất bảo quản, không phẩm màu', 'Hũ đóng kín, tem nhãn xuất xứ đầy đủ'],
+      desc: ['Mắm cá sặc là linh hồn của nồi lẩu mắm miền Tây. Cá sặc được làm sạch, ủ muối và thính theo công thức gia truyền cho đến khi thịt chín mềm, dậy mùi thơm đặc trưng.', 'Dùng để chưng với thịt bằm, trứng vịt; kho quẹt chấm rau luộc; hoặc nấu lẩu mắm cùng cà tím, bông điên điển.'],
+      spec: [['Quy cách', 'Hũ 500g'], ['Thành phần', 'Cá sặc, muối, thính gạo'], ['Bảo quản', 'Ngăn mát tủ lạnh sau khi mở'], ['Cách dùng', 'Chưng, kho, nấu lẩu mắm']]
+    },
+    'mam-tom-cha': {
+      highlights: ['Tôm đất Gò Công chà nhuyễn, ủ cùng tỏi ớt', 'Màu đỏ cam tự nhiên từ tôm, không phẩm màu', 'Chấm thịt luộc, xôi, cơm tấm đều ngon', 'Hũ đóng kín, tem nhãn xuất xứ đầy đủ'],
+      desc: ['Mắm tôm chà là đặc sản nức tiếng của Gò Công. Tôm đất tươi được chà nhuyễn, ủ với muối, tỏi, ớt cho đến khi lên màu đỏ cam tự nhiên và dậy vị ngọt của tôm.', 'Chỉ cần một muỗng mắm tôm chà là đủ "nâng" một dĩa thịt ba chỉ luộc, xôi trắng hay chén cơm nóng.'],
+      spec: [['Quy cách', 'Hũ 500g'], ['Thành phần', 'Tôm đất, muối, tỏi, ớt, đường'], ['Bảo quản', 'Ngăn mát tủ lạnh sau khi mở'], ['Cách dùng', 'Chấm thịt luộc, xôi, cơm tấm']]
+    },
+    'kho-ca-dua': {
+      highlights: ['Cá dứa biển, phơi đúng một nắng', 'Thịt dày, béo, ít xương', 'Chiên hoặc nướng, chấm nước mắm me', 'Đóng gói hút chân không'],
+      desc: ['Khô cá dứa một nắng là món khô "sang" của miền biển: thịt cá dày, béo, thớ mịn. Cá được làm sạch, ướp nhạt rồi phơi đúng một nắng để giữ độ mềm và vị ngọt tự nhiên.', 'Chiên vàng hai mặt hoặc nướng than, chấm nước mắm me hay tương ớt, ăn kèm dưa leo là thành món nhậu hoặc món cơm khó cưỡng.'],
+      spec: [['Quy cách', 'Gói 500g, hút chân không'], ['Thành phần', 'Cá dứa, muối, đường, tiêu'], ['Bảo quản', 'Ngăn mát 15 ngày, ngăn đông đến 3 tháng'], ['Cách dùng', 'Chiên, nướng']]
+    },
+    'kho-ca-keo': {
+      highlights: ['Cá kèo loại 1, con đều, thịt chắc', 'Phơi nắng tự nhiên, thơm và giòn khi nướng', 'Không hàn the, không phẩm màu', 'Đóng gói hút chân không'],
+      desc: ['Cá kèo là món quen của dân miền Tây, nhất là vùng ven biển Bạc Liêu, Sóc Trăng. Bếp Phù Sa chọn cá kèo loại 1 con đều, làm sạch, ướp vừa vị rồi phơi nắng cho thịt săn lại.', 'Nướng than đến khi da phồng giòn, xé ra chấm muối ớt chanh hay nước mắm me; hoặc chiên giòn ăn với cơm trắng.'],
+      spec: [['Quy cách', 'Gói 500g, hút chân không'], ['Thành phần', 'Cá kèo, muối, đường, ớt'], ['Bảo quản', 'Ngăn mát 15 ngày, ngăn đông đến 3 tháng'], ['Cách dùng', 'Nướng than, chiên giòn']]
+    },
+    'kho-ca-sac': {
+      highlights: ['Cá sặc bổi đồng, phơi nắng tự nhiên', 'Thịt dẻo, ngọt, chiên lên giòn rụm', 'Không hàn the, không phẩm màu', 'Đóng gói hút chân không'],
+      desc: ['Khô cá sặc bổi là món ăn "nhà nghèo" mà ngon có tiếng của miền Tây. Cá sặc đồng được làm sạch, ướp muối đường vừa phải rồi phơi nắng tự nhiên cho thịt dẻo và thơm.', 'Chiên giòn ăn với cơm trắng và xoài chua, hoặc chiên rồi trộn gỏi xoài xanh, đậu phộng rang là món nhậu được nhiều khách đặt lại nhất.'],
+      spec: [['Quy cách', 'Gói 500g, hút chân không'], ['Thành phần', 'Cá sặc bổi, muối, đường'], ['Bảo quản', 'Ngăn mát 15 ngày, ngăn đông đến 3 tháng'], ['Cách dùng', 'Chiên giòn, trộn gỏi xoài']]
+    },
+    'kho-muc-loai1': {
+      highlights: ['Mực câu Cà Mau loại 1, con to, thịt dày', 'Không tẩy trắng, không hóa chất bảo quản', 'Phơi nắng gió biển, ngọt tự nhiên', 'Nướng than, xé sợi chấm tương ớt'],
+      desc: ['Mực được ngư dân Cà Mau câu vào ban đêm, chọn con loại 1 to đều, thịt dày, không dập nát, rồi phơi nắng gió biển để giữ trọn vị ngọt tự nhiên.', 'Không tẩy trắng, không hóa chất bảo quản nên mực có màu vàng nâu tự nhiên. Nướng than cho thơm, đập dập, xé sợi, chấm tương ớt hoặc mayonnaise.'],
+      spec: [['Quy cách', 'Gói 500g, hút chân không'], ['Thành phần', 'Mực câu biển Cà Mau'], ['Bảo quản', 'Nơi khô ráo 2 tháng, ngăn đông đến 6 tháng'], ['Cách dùng', 'Nướng, chiên, xé sợi']]
+    },
+    'kho-muc-tam': {
+      highlights: ['Mực tẩm gia vị cay ngọt, xé sợi sẵn', 'Mở gói ăn liền, không cần nướng', 'Món nhắm, món ăn vặt tiện lợi', 'Đóng gói kín, giữ độ mềm dẻo'],
+      desc: ['Khô mực tẩm được làm từ mực biển, tẩm gia vị cay ngọt rồi sấy, cán mỏng và xé sợi sẵn để ăn liền.', 'Món nhắm lý tưởng khi xem bóng đá, đi chơi xa hay làm quà vặt cho cả nhà. Ngon hơn khi hơ nóng nhẹ vài giây.'],
+      spec: [['Quy cách', 'Gói 250g'], ['Thành phần', 'Mực biển, đường, muối, ớt, gia vị'], ['Bảo quản', 'Nơi khô ráo, dùng trong 3 ngày sau khi mở gói'], ['Cách dùng', 'Ăn liền hoặc hơ nóng']]
+    },
+    'tom-kho': {
+      highlights: ['Tôm đất nuôi quảng canh giữa rừng ngập mặn', 'Luộc, lột, phơi thủ công từng mẻ', 'Ngọt tự nhiên, không phẩm màu', 'Nấu canh, xào, ăn với củ kiệu dịp Tết'],
+      desc: ['Tôm đất Cà Mau được nuôi quảng canh trong rừng đước ngập mặn, ăn thức ăn tự nhiên nên thịt chắc và ngọt. Sau khi thu hoạch, tôm được luộc, lột vỏ và phơi thủ công qua nhiều nắng.', 'Không phẩm màu nên tôm có màu cam đỏ tự nhiên. Dùng nấu canh bí, xào rau, rim mặn, hay ăn cùng củ kiệu, dưa món ngày Tết.'],
+      spec: [['Quy cách', 'Gói 500g, hút chân không'], ['Thành phần', 'Tôm đất Cà Mau'], ['Bảo quản', 'Nơi khô ráo 1 tháng, ngăn mát đến 3 tháng'], ['Cách dùng', 'Nấu canh, xào, rim, ăn với củ kiệu']]
+    },
+    'lap-xuong': {
+      highlights: ['Thịt heo nạc vai, mỡ giòn, rượu mai quế lộ', 'Vị ngọt nhẹ đặc trưng Sóc Trăng', 'Không phẩm màu, không hàn the', 'Chiên, nướng, ăn với cơm hoặc xôi'],
+      desc: ['Lạp xưởng tươi Sóc Trăng làm từ thịt heo nạc vai xay hạt lựu, trộn mỡ giòn, đường, rượu mai quế lộ rồi phơi nhẹ, giữ độ mềm và vị ngọt thanh đặc trưng.', 'Chiên lửa nhỏ hoặc nướng than cho chảy mỡ, ăn với cơm trắng, xôi, bánh mì, hoặc xắt lát chiên với cơm chiên.'],
+      spec: [['Quy cách', 'Gói 500g'], ['Thành phần', 'Thịt heo, mỡ heo, đường, muối, rượu mai quế lộ'], ['Bảo quản', 'Ngăn mát 7 ngày, ngăn đông đến 3 tháng'], ['Cách dùng', 'Chiên, nướng, cơm chiên']]
+    },
+    'combo-qua-tang': {
+      highlights: ['Gồm 4 món: khô cá lóc, khô cá dứa, mắm cá linh, mắm thái', 'Hộp quà trang nhã, sẵn sàng để biếu tặng', 'Mỗi món đóng gói riêng, hút chân không', 'Có thể đổi món theo yêu cầu'],
+      desc: ['Combo quà tặng 4 món gom những đặc sản bán chạy nhất của Bếp Phù Sa vào một hộp: hai món khô phơi một nắng và hai món mắm ủ theo công thức của má.', 'Phù hợp biếu ông bà, cha mẹ, đối tác dịp lễ Tết. Muốn đổi món hay mua số lượng lớn, nhắn Zalo hoặc xem trang Quà biếu doanh nghiệp.'],
+      spec: [['Quy cách', 'Hộp quà 4 món'], ['Gồm', 'Khô cá lóc, khô cá dứa, mắm cá linh, mắm thái'], ['Bảo quản', 'Theo hướng dẫn trên từng món'], ['Phù hợp', 'Biếu tặng, lễ Tết']]
+    },
+    'combo-tet': {
+      highlights: ['Gồm 6 món đặc sản cho mâm cỗ ngày Tết', 'Hộp quà sang trọng, sẵn sàng để biếu', 'Mỗi món đóng gói riêng, hút chân không', 'Có thể đổi món theo yêu cầu'],
+      desc: ['Combo Tết sum vầy gói trọn 6 món đặc sản miền Tây cho những ngày đầu năm: khô cá lóc, khô cá dứa, khô cá sặc bổi, mắm cá linh, mắm thái và lạp xưởng Sóc Trăng.', 'Một hộp quà đủ đầy để biếu gia đình, người thân, đối tác. Đặt số lượng lớn cho công ty, xem trang Quà biếu doanh nghiệp để nhận báo giá theo số lượng.'],
+      spec: [['Quy cách', 'Hộp quà 6 món'], ['Gồm', 'Khô cá lóc, khô cá dứa, khô cá sặc bổi, mắm cá linh, mắm thái, lạp xưởng'], ['Bảo quản', 'Theo hướng dẫn trên từng món'], ['Phù hợp', 'Biếu tặng dịp Tết']]
+    }
+  };
+
   var STORY_LINKS = {
     'kho-muc-loai1': ['story-kho-muc.html', 'Những đêm câu mực ngoài biển Cà Mau.', 'Đọc câu chuyện khô mực →'],
     'tom-kho': ['story-tom-kho.html', 'Tôm nuôi quảng canh giữa rừng ngập mặn Đất Mũi.', 'Đọc câu chuyện tôm khô →'],
@@ -57,7 +127,7 @@
     var id = new URLSearchParams(window.location.search).get('id');
     var p = id && id !== DEFAULT_PRODUCT_ID ? findProduct(id) : null;
     if (!p) return;
-    var copy = CATEGORY_COPY[p.cat] || CATEGORY_COPY.dacsan;
+    var copy = PRODUCT_COPY[p.id] || CATEGORY_COPY[p.cat] || CATEGORY_COPY.dacsan;
     var name = escapeHtml(p.name);
 
     document.title = p.name + ' — Bếp Phù Sa';
@@ -229,8 +299,37 @@
     update();
   }
 
+  /* "Mua N gói là được freeship": counts what is already in the cart, in
+     the unit the product is sold in. */
+  function initFreeshipNudge() {
+    var el = document.querySelector('[data-pdp-freeship]');
+    var btn = document.querySelector('.detail-actions [data-add-to-cart]');
+    if (!el || !btn) return;
+
+    function update() {
+      var p = findProduct(btn.getAttribute('data-product-id'));
+      if (!p) return;
+      var unit = { mam: 'hũ', combo: 'hộp' }[p.cat] || 'gói';
+      var cart = readCart();
+      var cartSub = Object.keys(cart).reduce(function (sum, id) {
+        var item = findProduct(id);
+        return sum + (item ? item.price * cart[id] : 0);
+      }, 0);
+      if (cartSub >= FREE_SHIPPING_THRESHOLD) {
+        el.innerHTML = 'Giỏ hàng của bạn đã được <strong>miễn phí vận chuyển</strong>';
+        return;
+      }
+      // the fewest units of this product that take the order over the threshold
+      var packs = Math.ceil((FREE_SHIPPING_THRESHOLD - cartSub) / p.price);
+      el.innerHTML = (cartSub ? 'Mua thêm ' : 'Mua ') + '<strong>' + packs + ' ' + unit + '</strong> là đơn được <strong>miễn phí vận chuyển</strong>';
+    }
+    document.addEventListener('bps:cartchange', update);
+    update();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderProduct();
+    initFreeshipNudge();
     initGalleryThumbs();
     initQtyStepper();
     initTabs();

@@ -66,9 +66,12 @@
     };
     var totals = null;
 
+    var submitBtn = document.querySelector('[data-checkout-submit]');
     function renderTotals() {
       totals = computeTotals(subtotal, readCoupon());
       renderSummaryTotals(summaryEls, totals);
+      // the amount on the button removes the last "how much exactly?" doubt
+      if (submitBtn) submitBtn.textContent = 'Đặt hàng · ' + formatPrice(totals.total);
     }
 
     initCouponForm(document.querySelector('[data-coupon]'), renderTotals);
