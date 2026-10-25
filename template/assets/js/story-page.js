@@ -37,7 +37,10 @@
       var q = item.querySelector('.story-faq-item__q');
       var a = item.querySelector('.story-faq-item__a');
       if (q) q.setAttribute('aria-expanded', String(open));
-      if (a) a.setAttribute('aria-hidden', String(!open));
+      if (a) {
+        a.setAttribute('aria-hidden', String(!open));
+        a.inert = !open; // links inside a collapsed answer must not be tabbable
+      }
     }
 
     items.forEach(function (item) {

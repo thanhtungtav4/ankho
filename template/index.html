@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="assets/js/common.js" defer></script>
 <script src="assets/js/home.js" defer></script>
+<script src="assets/js/story-page.js" defer></script>
 </head>
 <body class="has-bottom-nav">
 <a href="#main" class="skip-link">Bỏ qua tới nội dung chính</a>
@@ -171,6 +172,7 @@
   </section>
 
   <!-- TOP SELLERS -->
+  <div class="home-band">
   <section id="products" aria-label="Sản phẩm bán chạy" class="section">
     <div class="section-head">
       <h2 class="section-title">🔥 BÁN CHẠY NHẤT</h2>
@@ -254,6 +256,7 @@
       </article>
     </div>
   </section>
+  </div>
 
   <!-- PROMO BANNERS -->
   <section aria-label="Ưu đãi" class="section">
@@ -343,6 +346,16 @@
           <span class="stat-item__label">Hoàn tiền nếu hàng lỗi, sai mô tả</span>
         </li>
       </ul>
+      <div class="cert-strip">
+        <p class="cert-strip__label">Chứng nhận &amp; cam kết chất lượng</p>
+        <ul class="cert-strip__list">
+          <li><span class="cert-strip__logo" role="img" aria-label="Logo chứng nhận">ảnh: logo chứng nhận</span></li>
+          <li><span class="cert-strip__logo" role="img" aria-label="Logo chứng nhận">ảnh: logo chứng nhận</span></li>
+          <li><span class="cert-strip__logo" role="img" aria-label="Logo chứng nhận">ảnh: logo chứng nhận</span></li>
+          <li><span class="cert-strip__logo" role="img" aria-label="Logo chứng nhận">ảnh: logo chứng nhận</span></li>
+          <li><span class="cert-strip__logo" role="img" aria-label="Logo chứng nhận">ảnh: logo chứng nhận</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -389,10 +402,10 @@
   <section aria-label="Quy trình và câu chuyện thương hiệu" class="section">
     <div class="story-grid">
       <div class="story-video">
-        <span class="story-video__tag">QUY TRÌNH LÀM KHÔ CÁ LÓC</span>
-        <a href="story-kho-ca-loc.html#quy-trinh" class="story-video__play" aria-label="Xem quy trình làm khô cá lóc 6 bước"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <h3 class="story-video__title">Từ đồng ra bếp<br>trong 6 bước</h3>
-        <span class="story-video__duration">6 bước</span>
+        <span class="story-video__tag">QUY TRÌNH LÀM KHÔ TRUYỀN THỐNG</span>
+        <button type="button" class="story-video__play" data-video-open aria-label="Phát video quy trình"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+        <h3 class="story-video__title">Giữ trọn vị ngon<br>Từ thiên nhiên</h3>
+        <span class="story-video__duration">01:45</span>
       </div>
       <div class="story-panel">
         <h3 class="story-panel__title">Bắt đầu từ nồi mắm của má</h3>
@@ -426,6 +439,86 @@
     </div>
   </section>
 
+  <!-- BLOG -->
+  <section aria-label="Cẩm nang và công thức" class="section">
+    <div class="section-head">
+      <h2 class="section-title">📖 CẨM NANG &amp; CÔNG THỨC</h2>
+      <a href="news.html" class="section-link">Xem tất cả<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="news-grid news-grid--home">
+      <article class="news-card">
+        <a href="news-detail.html" tabindex="-1" aria-hidden="true"><span role="img" aria-label="Bí quyết chọn khô cá ngon: 5 điều người miền Tây luôn để ý" class="news-card__media">ảnh: chọn khô cá ngon</span></a>
+        <div class="news-card__body">
+          <span class="news-card__cat">Cẩm nang</span>
+          <h3 class="news-card__title"><a href="news-detail.html">Bí quyết chọn khô cá ngon: 5 điều người miền Tây luôn để ý</a></h3>
+          <p class="news-card__excerpt">Nhìn màu, thử độ dẻo, ngửi mùi: cách phân biệt khô cá ngon, an toàn với hàng trôi nổi.</p>
+          <span class="news-card__meta">18/07/2026 · 5 phút đọc</span>
+        </div>
+      </article>
+      <article class="news-card">
+        <a href="news-detail.html" tabindex="-1" aria-hidden="true"><span role="img" aria-label="Khô cá lóc chiên giòn chấm me: món nhậu khó cưỡng" class="news-card__media">ảnh: khô cá lóc chiên</span></a>
+        <div class="news-card__body">
+          <span class="news-card__cat">Công thức</span>
+          <h3 class="news-card__title"><a href="news-detail.html">Khô cá lóc chiên giòn chấm me: món nhậu khó cưỡng</a></h3>
+          <p class="news-card__excerpt">Chỉ vài bước đơn giản để có đĩa khô cá lóc giòn rụm, chấm nước me chua ngọt đúng điệu miền Tây.</p>
+          <span class="news-card__meta">16/07/2026 · 4 phút đọc</span>
+        </div>
+      </article>
+      <article class="news-card">
+        <a href="news-detail.html" tabindex="-1" aria-hidden="true"><span role="img" aria-label="Cách bảo quản mắm và khô cá luôn thơm ngon" class="news-card__media">ảnh: bảo quản mắm</span></a>
+        <div class="news-card__body">
+          <span class="news-card__cat">Cẩm nang</span>
+          <h3 class="news-card__title"><a href="news-detail.html">Cách bảo quản mắm và khô cá luôn thơm ngon</a></h3>
+          <p class="news-card__excerpt">Mẹo giữ mắm, khô cá không bị hỏng, giữ trọn hương vị dù để lâu ngày.</p>
+          <span class="news-card__meta">14/07/2026 · 3 phút đọc</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="home-band">
+    <section aria-label="Câu hỏi thường gặp" class="content-section">
+      <h2 class="section-title section-title--center section-title--spaced">Câu hỏi thường gặp</h2>
+      <div class="story-faq">
+        <div class="story-faq-item">
+          <button type="button" class="story-faq-item__q" aria-expanded="false">Bao lâu thì tôi nhận được hàng?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="story-faq-item__a">Nội thành Cần Thơ 1–2 ngày, các tỉnh khác 2–5 ngày làm việc. Miễn phí vận chuyển cho đơn từ 500.000đ.</div>
+        </div>
+        <div class="story-faq-item">
+          <button type="button" class="story-faq-item__q" aria-expanded="false">Có thanh toán khi nhận hàng không?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="story-faq-item__a">Có. Bạn có thể trả tiền mặt khi nhận hàng (COD), hoặc chuyển khoản, MoMo khi đặt.</div>
+        </div>
+        <div class="story-faq-item">
+          <button type="button" class="story-faq-item__q" aria-expanded="false">Khô và mắm bảo quản được bao lâu?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="story-faq-item__a">Ngăn mát khoảng 15 ngày, ngăn đông đến 3 tháng tùy loại. Hướng dẫn chi tiết có trên tem nhãn từng món.</div>
+        </div>
+        <div class="story-faq-item">
+          <button type="button" class="story-faq-item__q" aria-expanded="false">Hàng bị lỗi thì đổi trả thế nào?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="story-faq-item__a">Trong 7 ngày kể từ khi nhận, hàng lỗi, sai mô tả hoặc hư hỏng khi vận chuyển được hoàn tiền 100% hoặc đổi mới.</div>
+        </div>
+        <div class="story-faq-item">
+          <button type="button" class="story-faq-item__q" aria-expanded="false">Tôi muốn đặt quà Tết số lượng lớn cho công ty?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="story-faq-item__a">Xem trang <a href="qua-bieu-doanh-nghiep.html">Quà biếu doanh nghiệp</a> và gửi yêu cầu, Bếp Phù Sa sẽ gọi lại báo giá theo số lượng.</div>
+        </div>
+      </div>
+      <p class="home-faq__more"><a href="policy.html#faq">Xem thêm câu hỏi →</a></p>
+    </section>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <section aria-label="Instagram" class="section">
+    <h2 class="section-title section-title--center">#BẾPPHÙSA TRÊN INSTAGRAM</h2>
+    <div class="insta-grid">
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" role="img" aria-label="Ảnh Instagram Bếp Phù Sa" class="insta-tile">ảnh IG</a>
+      <a href="#" class="insta-tile insta-tile--more"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Xem thêm <br>trên Instagram</a>
+    </div>
+  </section>
 </main>
 
 <!-- NEWSLETTER -->
@@ -517,6 +610,14 @@
   <a href="cart.html" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Giỏ hàng<span class="bottom-nav__badge" data-cart-count>0</span></a>
   <a href="login.html" class="bottom-nav__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Tài khoản</a>
 </nav>
+
+<!-- VIDEO MODAL -->
+<div role="dialog" aria-modal="true" aria-label="Video quy trình" class="video-modal" data-video-modal>
+  <div class="video-modal__inner">
+    <button type="button" class="video-modal__close" data-video-close aria-label="Đóng video"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="video-modal__screen"><svg width="52" height="52" viewBox="0 0 24 24" fill="#c99a48"><path d="M8 5v14l11-7z"/></svg>video: quy trình làm khô truyền thống<br>(nhúng &lt;iframe&gt; hoặc &lt;video&gt; thật tại đây)</div>
+  </div>
+</div>
 
 <!-- TOAST -->
 <div aria-live="polite" class="toast-wrap toast-wrap--above-nav" data-toast-wrap></div>

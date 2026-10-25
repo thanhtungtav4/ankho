@@ -313,6 +313,7 @@ table {
 .content-photo,
 .news-featured__media,
 .news-card__media,
+.cert-strip__logo,
 .article-meta__avatar,
 .article-cover,
 .related-item__thumb,
@@ -336,6 +337,7 @@ table {
 .content-photo,
 .news-featured__media,
 .news-card__media,
+.cert-strip__logo,
 .article-cover,
 .cart-line__img {
   display: flex;
@@ -1627,7 +1629,9 @@ table {
 /* ==========================================================================
    Stats
    ========================================================================== */
-.stats-section {
+/* full-width white band between cream sections (home rhythm) */
+.stats-section,
+.home-band {
   background: #fff;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -1687,6 +1691,13 @@ table {
 
   .stat-item__value {
     font-size: 26px;
+  }
+
+  .stat-item__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    margin-bottom: 8px;
   }
 }
 
@@ -3684,6 +3695,103 @@ table {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
+}
+
+.news-grid--home {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .news-grid--home {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .news-grid--home .news-card:nth-child(3) {
+    display: none;
+  }
+}
+
+/* phones: swipe through the articles instead of three tall stacked cards */
+@media (max-width: 640px) {
+  .news-grid--home {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -24px;
+    padding: 0 24px 4px;
+    scroll-padding-left: 24px;
+    scrollbar-width: none;
+  }
+
+  .news-grid--home::-webkit-scrollbar {
+    display: none;
+  }
+
+  .news-grid--home .news-card,
+  .news-grid--home .news-card:nth-child(3) {
+    display: flex;
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+}
+
+/* certification / partner logo slots under the home stats */
+.cert-strip {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--border);
+  text-align: center;
+}
+
+.cert-strip__label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* flex + center: a short last row stays centred instead of hanging left */
+.cert-strip__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cert-strip__logo {
+  --ph-size: 8px;
+  width: 132px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  text-align: center;
+  padding: 6px;
+}
+
+@media (max-width: 640px) {
+  .cert-strip__list {
+    gap: 10px;
+  }
+
+  /* the <li> is the flex item, so it carries the 3-per-row width */
+  .cert-strip__list li {
+    width: calc((100% - 24px) / 3);
+  }
+
+  .cert-strip__logo {
+    width: 100%;
+    height: 56px;
+  }
+}
+
+.home-faq__more {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .news-card {
